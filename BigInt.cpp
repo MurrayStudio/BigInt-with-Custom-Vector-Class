@@ -116,15 +116,16 @@ BigInt BigInt::operator+=(BigInt const& other) {
 	maxSize = bigIntVector.getSize();
 
 	//cout << "sizeOther: " << other.bigIntVector.getSize() << endl;
-	int otherCounter = maxSize - 1; //keeps track if we are done getting digits from other array
+	int otherCounter = other.bigIntVector.getSize() - 1; //keeps track if we are done getting digits from other array
+	cout << "otherCounter: " << otherCounter << endl;
 	int sizeDiffCounter = sizeDifference;
 
 	for (int i = maxSize - 1; i >= 0; i--) {
 		cout << "element1: " << bigIntVector.getElementAt(i) << endl;
 		cout << "element2: " << other.bigIntVector.getElementAt(i) << endl;
 		sum += bigIntVector.getElementAt(i);
-		if (otherCounter >= 0 && sizeDiffCounter) {
-			sum += other.bigIntVector.getElementAt(i);
+		if (otherCounter >= 0) {
+			sum += other.bigIntVector.getElementAt(i - sizeDifference); //move index if size is different
 			sum += carry;
 			cout << "sum: " << sum << endl;
 			if (sum > 9) {
@@ -144,15 +145,12 @@ BigInt BigInt::operator+=(BigInt const& other) {
 				carry = 0;
 				bigIntVector.setElementAt(i, sum%base);
 			}
-			--otherCounter;
+			//only decrement otherCounter if we have reached 2nd vector elements
+				--otherCounter;
 		}
-		if (otherCounter < 0) {
+		if (otherCounter < 0 && carry > 0) {
 			bigIntVector.resize(); //increase size of big int
 			bigIntVector.setElementAt(i, carry); //set carry in front of sum spot
-		}
-		if (sizeDiffCounter) {
-			bigIntVector.setElementAt(i, sum%base);
-			--sizeDiffCounter;
 		}
 		sum = 0;
 		//bigIntVector[i] = sum%base;

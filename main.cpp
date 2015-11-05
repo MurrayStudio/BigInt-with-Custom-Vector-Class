@@ -26,9 +26,9 @@ int main(void) {
 
 	cout << "num3 (31): " << num3 << endl;
 
-	BigInt numA = 135;
+	BigInt numA = 1200;
 
-	cout << "numA (135): " << numA << endl;
+	cout << "numA (1200): " << numA << endl;
 
 	BigInt numB = 55;
 
@@ -36,7 +36,7 @@ int main(void) {
 	
 	BigInt numC = numA + numB;
 
-	cout << "numC (190): " << numC << endl;
+	cout << "numC (1255): " << numC << endl;
 
 	// binary addition BigInt+long
 	BigInt num4 = num3 + 2;
