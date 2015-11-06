@@ -93,14 +93,10 @@ BigInt BigInt::operator+=(BigInt const& other) {
 	}
 	//possible check for both negative???
 
-	//std::vector<int>::iterator
-	//	iterator1 = bigIntVector.begin();
-	//std::vector<int>::const_iterator
-	//	iterator2 = other.bigIntVector.begin();
 
 	int sum = 0; //holds the sum of the value in both vectors
-	int maxSize = 0;
-	int carry = 0;
+	int maxSize = 0; //holds size of biggest BigInt
+	int carry = 0; //holds carry over value
 	int sizeDifference = 0; //holds size difference between b and a if b is bigger
 
 	//check size
@@ -118,7 +114,6 @@ BigInt BigInt::operator+=(BigInt const& other) {
 	//cout << "sizeOther: " << other.bigIntVector.getSize() << endl;
 	int otherCounter = other.bigIntVector.getSize() - 1; //keeps track if we are done getting digits from other array
 	cout << "otherCounter: " << otherCounter << endl;
-	int sizeDiffCounter = sizeDifference;
 
 	for (int i = maxSize - 1; i >= 0; i--) {
 		cout << "element1: " << bigIntVector.getElementAt(i) << endl;
@@ -131,30 +126,20 @@ BigInt BigInt::operator+=(BigInt const& other) {
 			cout << "sum: " << sum << endl;
 			if (sum > 9) {
 				++carry;
-				//for (int y = bigIntVector.getSize() - 1; y >= 0; y--) {
-				//	cout << "elements: " << bigIntVector.getElementAt(y) << endl;
-				//}
-
-				//bigIntVector.resize(); //increase size of big int
-
-				//for (int y = bigIntVector.getSize() - 1; y >= 0; y--) {
-				//	cout << "elements2: " << bigIntVector.getElementAt(y) << endl;
-				//}
 				bigIntVector.setElementAt(i, sum%base);
 			}
 			else {
 				carry = 0;
 				bigIntVector.setElementAt(i, sum%base);
 			}
-			//only decrement otherCounter if we have reached 2nd vector elements
-				--otherCounter;
+
+			--otherCounter; //only decrement otherCounter if we have reached 2nd vector elements
 		}
 		if (otherCounter < 0 && carry > 0) {
 			bigIntVector.resize(); //increase size of big int
 			bigIntVector.setElementAt(i, carry); //set carry in front of sum spot
 		}
 		sum = 0;
-		//bigIntVector[i] = sum%base;
 	}
 
 	return *this;

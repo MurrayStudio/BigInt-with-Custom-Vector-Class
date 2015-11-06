@@ -41,8 +41,12 @@ int main(void) {
 	// binary addition BigInt+long
 	BigInt num4 = num3 + 2;
 
+	cout << "num4 (33): " << num4 << endl;
+
 	// unary +
 	BigInt num5 = +num2;
+
+	cout << "num5 (20): " << num5 << endl;
 
 	// prefix increment
 	BigInt num6 = ++num1;
@@ -56,10 +60,10 @@ int main(void) {
 	// increment
 	num3++;
 
-	// print the values
-	cout << "Num Values: " << num1 << " " << num2 << " " << num3 << " " <<
-		num4 << " " << num5 << " " << num6 << " " <<
-		num7 << " " << num8 << "\n" << endl;
+	//// print the values
+	//cout << "Num Values: " << num1 << " " << num2 << " " << num3 << " " <<
+	//	num4 << " " << num5 << " " << num6 << " " <<
+	//	num7 << " " << num8 << "\n" << endl;
 
 	// compound assignment addition with BigInt
 	num4 += num5;
