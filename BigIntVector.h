@@ -4,6 +4,7 @@
 class BigIntVector
 {
 public:
+	BigIntVector(BigIntVector const& orig);
 	BigIntVector(); 
 	BigIntVector(long initialSize); 
 
@@ -17,8 +18,7 @@ public:
 	long operator [](long i);
 
 	long *vectorArray;
-	long vectorTotalSize;
-	long nextValue;
+	long vectorSize;
 };
 
 #endif

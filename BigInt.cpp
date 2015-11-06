@@ -19,12 +19,17 @@ using namespace std;
 *****************************************************************/
 
 // copy constructor
-BigInt::BigInt(BigInt const& orig) {
+BigInt::BigInt(BigInt const& orig) 
+: bigIntVector(orig.bigIntVector)
+, isPositive(orig.isPositive)
+, base(orig.base)
+, skip(orig.skip) 
+{
 	//this->data = orig.data;
-	
+
 	//orig = bigIntVector;
 
-	*this = orig;
+	//*this = orig;
 }
 
 // constructor where operand is a long
@@ -34,7 +39,7 @@ BigInt::BigInt(long num) {
 	base = 10;
 
 	long sizeOfLong = 0; //holds size of num
-	long tempNum = num; 
+	long tempNum = num;
 
 	//get size of num
 	if (tempNum == 0) {
@@ -77,10 +82,15 @@ BigInt::~BigInt() {
 BigInt BigInt::operator+(BigInt const& other) const {
 	//BigInt rtnVal(this->data + other.data);
 
-	BigInt thisBigInt = *this;
-	thisBigInt += other;
 
-	return thisBigInt; //return a BigInt
+	BigInt temp(*this);
+	return temp += other;
+	
+	//PROBLEM: I THINK YOU ARE MODIFYING NUM1 WHEN IT IS PASSED IN DIRECTLY BECAUSE CONSTRUCTOR ISSUES
+	//BigInt thisBigInt = *this;
+	//thisBigInt += other;
+
+	//return thisBigInt; //return a BigInt
 }
 
 // compound addition-assignment operator
@@ -107,23 +117,23 @@ BigInt BigInt::operator+=(BigInt const& other) {
 
 	if (bigIntVector.getSize() > other.bigIntVector.getSize()) {
 		sizeDifference = bigIntVector.getSize() - other.bigIntVector.getSize();
-		cout << "sizeDiff: " << sizeDifference << endl;
+		//cout << "sizeDiff: " << sizeDifference << endl;
 	}
 
 	maxSize = bigIntVector.getSize();
 
 	int otherCounter = other.bigIntVector.getSize() - 1; //keeps track if we are done getting digits from other array
-	cout << "otherCounter: " << otherCounter << endl;
+	//cout << "otherCounter: " << otherCounter << endl;
 
 	for (int i = maxSize - 1; i >= 0; i--) {
-		cout << "element1: " << bigIntVector.getElementAt(i) << endl;
-		cout << "element2: " << other.bigIntVector.getElementAt(i) << endl;
+		//cout << "element1: " << bigIntVector.getElementAt(i) << endl;
+		//cout << "element2: " << other.bigIntVector.getElementAt(i) << endl;
 		sum += bigIntVector.getElementAt(i);
 		if (otherCounter >= 0) {
 			sum += other.bigIntVector.getElementAt(i - sizeDifference); //move index if size is different
 			sum += carry;
 			carry = 0;
-			cout << "sum: " << sum << endl;
+			//cout << "sum: " << sum << endl;
 			if (sum > 9) {
 				++carry;
 				bigIntVector.setElementAt(i, sum%base);

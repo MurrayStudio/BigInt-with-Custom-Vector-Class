@@ -4,42 +4,53 @@
 
 using namespace std;
 
+// copy constructor
+BigIntVector::BigIntVector(BigIntVector const& orig)
+	: vectorArray(orig.vectorArray)
+	, vectorSize(orig.vectorSize)
+{
+	//this->data = orig.data;
+
+	//orig = bigIntVector;
+
+	//*this = orig;
+	//cout << "vector copy called" << endl;
+}
+
+//default constructor
 BigIntVector::BigIntVector()
 {
-	vectorTotalSize = 1;
+	vectorSize = 1;
 
 	vectorArray = (long *)malloc(10 * sizeof(long));
 	for (long i = 0; i < 10; i++) vectorArray[i] = 0;
-
-	nextValue = 0;
 }
 
+//constructor that initializes a custom size for vector
 BigIntVector::BigIntVector(long initialSize)
 {
-	vectorTotalSize = initialSize;
+	vectorSize = initialSize;
 
 	vectorArray = (long *)malloc(initialSize*sizeof(long));
 	for (long i = 0; i < initialSize; i++) vectorArray[i] = 0;
-
-	nextValue = 0;
 }
 
 long BigIntVector::getSize() const
 {
-	return vectorTotalSize;
+	return vectorSize;
 }
 
 void BigIntVector::resize() {
 
 	long *oldArray = vectorArray;
 
-	vectorArray = new long[vectorTotalSize + 1];
+	vectorArray = new long[vectorSize + 1];
 	//copy old array after new slot allocated in front
-	for (int k = 1; k < vectorTotalSize + 1; k++) {
-		vectorArray[k] = oldArray[k-1]; //k-1 because old array is behind one index
+	for (int k = 1; k < vectorSize + 1; k++) {
+		vectorArray[k] = oldArray[k - 1]; //k-1 because old array is behind one index
 	}
 
-	vectorTotalSize = vectorTotalSize + 1;
+	vectorSize = vectorSize + 1;
 
 	delete[] oldArray;
 }
@@ -63,10 +74,10 @@ void BigIntVector::setElementAt(long index, long value)
 
 void BigIntVector::removeElementAt(long index)
 {
-	for (long i = index; i < vectorTotalSize; i++)
+	for (long i = index; i < vectorSize; i++)
 	{
 		vectorArray[i] = vectorArray[i + 1];
 	}
 
-	vectorArray[vectorTotalSize - 1] = 0;
+	vectorArray[vectorSize - 1] = 0;
 }
