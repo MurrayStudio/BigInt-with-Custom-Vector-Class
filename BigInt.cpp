@@ -127,6 +127,7 @@ BigInt BigInt::operator+=(BigInt const& other) {
 		if (otherCounter >= 0) {
 			sum += other.bigIntVector.getElementAt(i - sizeDifference); //move index if size is different
 			sum += carry;
+			carry = 0;
 			cout << "sum: " << sum << endl;
 			if (sum > 9) {
 				++carry;

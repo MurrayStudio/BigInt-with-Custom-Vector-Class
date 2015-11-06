@@ -11,7 +11,7 @@ public:
 	long getSize() const; //
 	long getIncrementSize(); //
 	long getElementAt(long value) const; //
-	void resize(); 
+	void resize();
 
 	void add(long value); //
 	void setElementAt(long index, long value);//

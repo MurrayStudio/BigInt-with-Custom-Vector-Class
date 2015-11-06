@@ -26,17 +26,17 @@ int main(void) {
 
 	cout << "num3 (31): " << num3 << endl;
 
-	BigInt numA = 1200;
+	BigInt numA = 99999;
 
-	cout << "numA (1200): " << numA << endl;
+	cout << "numA (99999): " << numA << endl;
 
-	BigInt numB = 55;
+	BigInt numB = 99999;
 
-	cout << "numB (55): " << numB << endl;
+	cout << "numB (99999): " << numB << endl;
 	
 	BigInt numC = numA + numB;
 
-	cout << "numC (1255): " << numC << endl;
+	cout << "numC (199998): " << numC << endl;
 
 	// binary addition BigInt+long
 	BigInt num4 = num3 + 2;
