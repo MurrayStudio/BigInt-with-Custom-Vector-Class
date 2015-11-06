@@ -48,8 +48,13 @@ int main(void) {
 
 	cout << "num5 (20): " << num5 << endl;
 
+
+	cout << "num1 (12): " << num1 << endl;
 	// prefix increment
 	BigInt num6 = ++num1;
+	cout << "num1 (12): " << num1 << endl;
+
+	cout << "num6 (13): " << num6 << endl;
 
 	// postfix increment
 	BigInt num7 = num3++;

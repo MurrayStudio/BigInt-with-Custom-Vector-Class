@@ -23,7 +23,6 @@ BigInt::BigInt(BigInt const& orig) {
 	//this->data = orig.data;
 	*this = orig;
 
-
 	//LOOK AT THIS!!!
 }
 
@@ -34,7 +33,7 @@ BigInt::BigInt(long num) {
 	base = 10;
 
 	int sizeOfLong = 0; //holds size of num
-	int tempNum = num;
+	int tempNum = num; 
 
 	//get size of num
 	if (tempNum == 0) {
@@ -70,6 +69,7 @@ BigInt::BigInt(long num) {
 
 // destructor
 BigInt::~BigInt() {
+	//delete *this;
 }
 
 // binary addition
@@ -111,7 +111,6 @@ BigInt BigInt::operator+=(BigInt const& other) {
 
 	maxSize = bigIntVector.getSize();
 
-	//cout << "sizeOther: " << other.bigIntVector.getSize() << endl;
 	int otherCounter = other.bigIntVector.getSize() - 1; //keeps track if we are done getting digits from other array
 	cout << "otherCounter: " << otherCounter << endl;
 
@@ -144,35 +143,48 @@ BigInt BigInt::operator+=(BigInt const& other) {
 
 	return *this;
 
-
-
-	//while (iterator1 != bigIntVector.end() || iterator2 != other.bigIntVector.end()) {
-	//	if (iterator1 != bigIntVector.end()) {
-	//		sum += *iterator1;
-	//		cout << "sum1: " << sum << endl;
-	//	}
-	//	else {
-	//		bigIntVector.push_back(0);
-	//	}
-	//	if (iterator2 != other.bigIntVector.end()) {
-	//		sum += *iterator2;
-	//		cout << "sum2: " << sum << endl;
-	//		++iterator2;
-	//	}
-	//	*iterator1 = sum % base;
-	//	cout << "iterator: " << *iterator1 << endl;
-	//	++iterator1;
-	//	sum /= base;
-	//}
-	//if (sum) bigIntVector.push_back(1);
-
-	//return *this;
-
 }
 
 // prefix '++' operator
 BigInt BigInt::operator++() {
-	return this->data = this->data + 1;
+	//return this->data = this->data + 1;
+
+	BigInt thisBigInt = *this;
+	thisBigInt += 1;
+
+	return thisBigInt; //return a BigInt
+
+	//int otherCounter = 0; //if counter goes negative we have added the 1
+	//int sum = 0; //holds sum of digits
+	//int carry = 0; //holds any carry values
+
+	//for (int i = bigIntVector.getSize() - 1; i >= 0; i--) {
+	//	cout << "element1: " << bigIntVector.getElementAt(i) << endl;
+	//	sum += bigIntVector.getElementAt(i);
+	//	if (otherCounter == 0) { //if counter goes negative we have added the 1
+	//		sum += 1; //add the 1
+	//		sum += carry;
+	//		carry = 0;
+	//		cout << "sum: " << sum << endl;
+	//		if (sum > 9) {
+	//			++carry;
+	//			bigIntVector.setElementAt(i, sum%base);
+	//		}
+	//		else {
+	//			carry = 0;
+	//			bigIntVector.setElementAt(i, sum%base);
+	//		}
+
+	//		--otherCounter; //only decrement otherCounter if we have reached 2nd vector elements
+	//	}
+	//	if (otherCounter < 0 && carry > 0) {
+	//		bigIntVector.resize(); //increase size of big int
+	//		bigIntVector.setElementAt(i, carry); //set carry in front of sum spot
+	//	}
+	//	sum = 0;
+	//}
+
+	//return *this;
 }
 
 // postfix '++' operator
