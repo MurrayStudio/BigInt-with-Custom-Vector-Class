@@ -46,7 +46,7 @@ int main(void) {
 	// unary +
 	BigInt num5 = +num2;
 
-	cout << "num5 (20): " << num5 << endl;
+	cout << "num5 (19): " << num5 << endl;
 
 
 	// prefix increment

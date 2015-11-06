@@ -52,6 +52,10 @@ public:
 	// compound addition-assignment operator
 	BigInt operator+=(BigInt const& other);
 
+	// binary subtraction
+	BigInt BigInt::operator-(BigInt const& other) const;
+	BigInt BigInt::operator-=(BigInt const& other);
+
 	// equality operation
 	bool operator==(BigInt const& other) const;
 
