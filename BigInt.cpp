@@ -21,9 +21,10 @@ using namespace std;
 // copy constructor
 BigInt::BigInt(BigInt const& orig) {
 	//this->data = orig.data;
-	*this = orig;
+	
+	//orig = bigIntVector;
 
-	//LOOK AT THIS!!!
+	*this = orig;
 }
 
 // constructor where operand is a long
@@ -32,8 +33,8 @@ BigInt::BigInt(long num) {
 
 	base = 10;
 
-	int sizeOfLong = 0; //holds size of num
-	int tempNum = num; 
+	long sizeOfLong = 0; //holds size of num
+	long tempNum = num; 
 
 	//get size of num
 	if (tempNum == 0) {

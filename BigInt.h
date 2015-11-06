@@ -4,7 +4,6 @@
 #ifndef BIGINT_H
 #define BIGINT_H
 
-#include <vector>
 #include <iostream>
 #include "BigIntVector.h"
 
@@ -19,11 +18,12 @@
 *****************************************************************/
 class BigInt {
 private:
-	//std::vector<int> bigIntVector;
 	BigIntVector bigIntVector;
 	bool isPositive;
 	int base;
 	unsigned int skip;
+
+	BigIntVector* ptr; //pointer to copy?
 
 	long data; // our numeric data, for now
 
