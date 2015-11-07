@@ -7,6 +7,7 @@ public:
 	BigIntVector(BigIntVector const& orig);
 	BigIntVector(); 
 	BigIntVector(long initialSize); 
+	~BigIntVector(); //destructor 
 
 	long getSize() const; 
 	long getElementAt(long value) const; 
@@ -16,6 +17,7 @@ public:
 	void removeElementAt(long index); 
 
 	long operator [](long i);
+	//friend std::ostream& operator<<(std::ostream& os, const BigIntVector& vct);
 
 	long *vectorArray;
 	long vectorSize;

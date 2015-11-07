@@ -20,12 +20,12 @@ using namespace std;
 
 // copy constructor
 BigInt::BigInt(BigInt const& orig) 
-: bigIntVector(orig.bigIntVector)
-, isPositive(orig.isPositive)
+ : isPositive(orig.isPositive)
 , base(orig.base)
 , skip(orig.skip) 
 {
 	//this->data = orig.data;
+	this->bigIntVector = new BigIntVector(*(orig.bigIntVector));
 
 	//orig = bigIntVector;
 
@@ -52,7 +52,8 @@ BigInt::BigInt(long num) {
 	}
 
 	//resize vector to match size of long
-	bigIntVector = BigIntVector(sizeOfLong);
+	this->bigIntVector = new BigIntVector(sizeOfLong);
+
 	//cout << "sizeVec: " << bigIntVector.getSize() << endl;
 
 	if (num < 0) {
@@ -68,14 +69,14 @@ BigInt::BigInt(long num) {
 		pushedNum = (long)(num%base);
 		//cout << "pushedNum: " << pushedNum << endl;
 		//cout << "i: " << i << endl;
-		bigIntVector.setElementAt(i, pushedNum);
+		bigIntVector->setElementAt(i, pushedNum);
 		num /= base;
 	}
 }
 
 // destructor
 BigInt::~BigInt() {
-	//delete *this;
+	//delete[] this->bigIntVector;
 }
 
 // binary addition
@@ -83,8 +84,10 @@ BigInt BigInt::operator+(BigInt const& other) const {
 	//BigInt rtnVal(this->data + other.data);
 
 
-	BigInt temp(*this);
-	return temp += other;
+	//BigInt temp(*this);
+	//return this += other;
+
+	return BigInt(*this) += other;
 	
 	//PROBLEM: I THINK YOU ARE MODIFYING NUM1 WHEN IT IS PASSED IN DIRECTLY BECAUSE CONSTRUCTOR ISSUES
 	//BigInt thisBigInt = *this;
@@ -111,43 +114,43 @@ BigInt BigInt::operator+=(BigInt const& other) {
 	int sizeDifference = 0; //holds size difference between b and a if b is bigger
 
 	//check size
-	while (bigIntVector.getSize() < other.bigIntVector.getSize()) {
-		bigIntVector.resize(); //increase size of first big int until it matches size of second
+	while (bigIntVector->getSize() < other.bigIntVector->getSize()) {
+		bigIntVector->resize(); //increase size of first big int until it matches size of second
 	}
 
-	if (bigIntVector.getSize() > other.bigIntVector.getSize()) {
-		sizeDifference = bigIntVector.getSize() - other.bigIntVector.getSize();
+	if (bigIntVector->getSize() > other.bigIntVector->getSize()) {
+		sizeDifference = bigIntVector->getSize() - other.bigIntVector->getSize();
 		//cout << "sizeDiff: " << sizeDifference << endl;
 	}
 
-	maxSize = bigIntVector.getSize();
+	maxSize = bigIntVector->getSize();
 
-	int otherCounter = other.bigIntVector.getSize() - 1; //keeps track if we are done getting digits from other array
+	int otherCounter = other.bigIntVector->getSize() - 1; //keeps track if we are done getting digits from other array
 	//cout << "otherCounter: " << otherCounter << endl;
 
 	for (int i = maxSize - 1; i >= 0; i--) {
 		//cout << "element1: " << bigIntVector.getElementAt(i) << endl;
 		//cout << "element2: " << other.bigIntVector.getElementAt(i) << endl;
-		sum += bigIntVector.getElementAt(i);
+		sum += bigIntVector->getElementAt(i);
 		if (otherCounter >= 0) {
-			sum += other.bigIntVector.getElementAt(i - sizeDifference); //move index if size is different
+			sum += other.bigIntVector->getElementAt(i - sizeDifference); //move index if size is different
 			sum += carry;
 			carry = 0;
 			//cout << "sum: " << sum << endl;
 			if (sum > 9) {
 				++carry;
-				bigIntVector.setElementAt(i, sum%base);
+				bigIntVector->setElementAt(i, sum%base);
 			}
 			else {
 				carry = 0;
-				bigIntVector.setElementAt(i, sum%base);
+				bigIntVector->setElementAt(i, sum%base);
 			}
 
 			--otherCounter; //only decrement otherCounter if we have reached 2nd vector elements
 		}
 		if (otherCounter < 0 && carry > 0) {
-			bigIntVector.resize(); //increase size of big int
-			bigIntVector.setElementAt(i, carry); //set carry in front of sum spot
+			bigIntVector->resize(); //increase size of big int
+			bigIntVector->setElementAt(i, carry); //set carry in front of sum spot
 		}
 		sum = 0;
 	}
@@ -204,43 +207,43 @@ BigInt BigInt::operator-=(BigInt const& other) {
 	int sizeDifference = 0; //holds size difference between b and a if b is bigger
 
 							//check size
-	while (bigIntVector.getSize() < other.bigIntVector.getSize()) {
-		bigIntVector.resize(); //increase size of first big int until it matches size of second
+	while (bigIntVector->getSize() < other.bigIntVector->getSize()) {
+		bigIntVector->resize(); //increase size of first big int until it matches size of second
 	}
 
-	if (bigIntVector.getSize() > other.bigIntVector.getSize()) {
-		sizeDifference = bigIntVector.getSize() - other.bigIntVector.getSize();
+	if (bigIntVector->getSize() > other.bigIntVector->getSize()) {
+		sizeDifference = bigIntVector->getSize() - other.bigIntVector->getSize();
 		//cout << "sizeDiff: " << sizeDifference << endl;
 	}
 
-	maxSize = bigIntVector.getSize();
+	maxSize = bigIntVector->getSize();
 
-	int otherCounter = other.bigIntVector.getSize() - 1; //keeps track if we are done getting digits from other array
+	int otherCounter = other.bigIntVector->getSize() - 1; //keeps track if we are done getting digits from other array
 														 //cout << "otherCounter: " << otherCounter << endl;
 
 	for (int i = maxSize - 1; i >= 0; i--) {
 		//cout << "element1: " << bigIntVector.getElementAt(i) << endl;
 		//cout << "element2: " << other.bigIntVector.getElementAt(i) << endl;
-		sum += bigIntVector.getElementAt(i);
+		sum += bigIntVector->getElementAt(i);
 		if (otherCounter >= 0) {
-			sum += other.bigIntVector.getElementAt(i - sizeDifference); //move index if size is different
+			sum += other.bigIntVector->getElementAt(i - sizeDifference); //move index if size is different
 			sum += carry;
 			carry = 0;
 			//cout << "sum: " << sum << endl;
 			if (sum > 9) {
 				++carry;
-				bigIntVector.setElementAt(i, sum%base);
+				bigIntVector->setElementAt(i, sum%base);
 			}
 			else {
 				carry = 0;
-				bigIntVector.setElementAt(i, sum%base);
+				bigIntVector->setElementAt(i, sum%base);
 			}
 
 			--otherCounter; //only decrement otherCounter if we have reached 2nd vector elements
 		}
 		if (otherCounter < 0 && carry > 0) {
-			bigIntVector.resize(); //increase size of big int
-			bigIntVector.setElementAt(i, carry); //set carry in front of sum spot
+			bigIntVector->resize(); //increase size of big int
+			bigIntVector->setElementAt(i, carry); //set carry in front of sum spot
 		}
 		sum = 0;
 	}
@@ -264,10 +267,12 @@ ostream & operator<<(ostream& os, BigInt& num) {
 
 	if (!num.isPositive) os << '-';
 
-	for (int i = 0; i < num.bigIntVector.getSize(); i++) {
-		os << num.bigIntVector[i];
+	for (int i = 0; i < num.bigIntVector->getSize(); i++) {
+		cout << "elements print: " << num.bigIntVector[i] << endl;
+		os << num.bigIntVector[i]; //problem with printing all
 		//num.bigIntVector.pop_back();
 	}
+
 
 	return os;
 }

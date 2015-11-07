@@ -6,9 +6,15 @@ using namespace std;
 
 // copy constructor
 BigIntVector::BigIntVector(BigIntVector const& orig)
-	: vectorArray(orig.vectorArray)
-	, vectorSize(orig.vectorSize)
+	: vectorSize(orig.vectorSize)
 {
+	vectorArray = new long[orig.vectorSize];
+
+	//for loop
+	for (int i = 0; i < vectorSize; i++) {
+		vectorArray[i] = orig.vectorArray[i];
+	}
+
 	//this->data = orig.data;
 
 	//orig = bigIntVector;
@@ -17,13 +23,21 @@ BigIntVector::BigIntVector(BigIntVector const& orig)
 	//cout << "vector copy called" << endl;
 }
 
+//destructor 
+BigIntVector::~BigIntVector() {
+	//delete[] vectorArray;
+}
+
 //default constructor
 BigIntVector::BigIntVector()
 {
 	vectorSize = 1;
 
-	vectorArray = (long *)malloc(10 * sizeof(long));
-	for (long i = 0; i < 10; i++) vectorArray[i] = 0;
+	//vectorArray = (long *)malloc(10 * sizeof(long));
+	vectorArray = new long[vectorSize];
+	for (long i = 0; i < vectorSize; i++) {
+		vectorArray[i] = 0;
+	}
 }
 
 //constructor that initializes a custom size for vector
@@ -31,8 +45,11 @@ BigIntVector::BigIntVector(long initialSize)
 {
 	vectorSize = initialSize;
 
-	vectorArray = (long *)malloc(initialSize*sizeof(long));
-	for (long i = 0; i < initialSize; i++) vectorArray[i] = 0;
+	//vectorArray = (long *)malloc(initialSize*sizeof(long));
+	vectorArray = new long[vectorSize];
+	for (long i = 0; i < initialSize; i++) {
+		vectorArray[i] = 0;
+	}
 }
 
 long BigIntVector::getSize() const
@@ -81,3 +98,10 @@ void BigIntVector::removeElementAt(long index)
 
 	vectorArray[vectorSize - 1] = 0;
 }
+
+//ostream& operator<<(std::ostream& os, const BigIntVector& vct)
+//{
+//	for (long i = 0; i < vct.vectorSize; i++)
+//		os << vct.vectorArray[0];
+//	return os;
+//}

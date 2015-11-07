@@ -18,12 +18,10 @@
 *****************************************************************/
 class BigInt {
 private:
-	BigIntVector bigIntVector;
+	BigIntVector *bigIntVector;
 	bool isPositive;
 	int base;
 	unsigned int skip;
-
-	BigIntVector* ptr; //pointer to copy?
 
 	long data; // our numeric data, for now
 
