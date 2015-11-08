@@ -71,7 +71,9 @@ int main(void) {
 	cout << "numF (102000114): " << numF << endl;
 
 	// postfix increment
-	//BigInt num7 = num3++;
+	BigInt num8 = num3++;
+
+	cout << "num8 (32): " << num8 << endl;
 
 	// direct initialization
 	//BigInt num8 = num3;

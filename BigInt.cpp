@@ -161,19 +161,18 @@ BigInt BigInt::operator+=(BigInt const& other) {
 
 // prefix '++' operator
 BigInt BigInt::operator++() {
-	//return this->data = this->data + 1;
 
-	BigInt thisBigInt = *this;
-	thisBigInt += 1;
+	return BigInt(*this) += 1;
 
-	return thisBigInt; //return a BigInt
+	//BigInt thisBigInt = *this;
+	//thisBigInt += 1;
+
+	//return thisBigInt; //return a BigInt
 }
 
 // postfix '++' operator
 BigInt BigInt::operator++(int dummy) {
-	BigInt temp = *this;
-	this->data = this->data + 1;
-	return temp;
+	return ++BigInt(*this); //AM I DOING THIS RIGHT?
 }
 
 // unary '+' operator
@@ -276,11 +275,6 @@ bool BigInt::operator==(BigInt const& other) const {
 
 // output-stream operator for BigInt (non-member function)
 ostream & operator<<(ostream& os, BigInt& num) {
-	//os << num.data;
-
-	//while (num.bigIntVector.size() && num.bigIntVector.back() == 0) {
-	//	//num.bigIntVector.pop_back();
-	//}
 
 	if (!num.isPositive) os << '-';
 
