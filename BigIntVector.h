@@ -17,7 +17,7 @@ public:
 	void removeElementAt(long index); 
 
 	long operator [](long i);
-	//friend std::ostream& operator<<(std::ostream& os, const BigIntVector& vct);
+	friend std::ostream& operator<<(std::ostream& os, const BigIntVector& vct);
 
 	long *vectorArray;
 	long vectorSize;

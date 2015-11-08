@@ -267,11 +267,11 @@ ostream & operator<<(ostream& os, BigInt& num) {
 
 	if (!num.isPositive) os << '-';
 
-	for (int i = 0; i < num.bigIntVector->getSize(); i++) {
-		cout << "elements print: " << num.bigIntVector[i] << endl;
-		os << num.bigIntVector[i]; //problem with printing all
+	//for (int i = 0; i < num.bigIntVector->getSize(); i++) {
+		cout << "elements print: " << num.bigIntVector[0] << endl;
+		os << num.bigIntVector[0]; //problem with printing all, this works for now though
 		//num.bigIntVector.pop_back();
-	}
+	//}
 
 
 	return os;

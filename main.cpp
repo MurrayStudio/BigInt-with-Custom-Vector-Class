@@ -54,14 +54,18 @@ int main(void) {
 
 	cout << "num6 (13): " << num6 << endl;
 
+	BigInt num7 = num2 - num1;
+
+	cout << "num7 (7): " << num7 << endl;
+
 	// postfix increment
-	BigInt num7 = num3++;
+	//BigInt num7 = num3++;
 
 	// direct initialization
-	BigInt num8 = num3;
+	//BigInt num8 = num3;
 
 	// increment
-	num3++;
+	//num3++;
 
 	//// print the values
 	//cout << "Num Values: " << num1 << " " << num2 << " " << num3 << " " <<
@@ -69,39 +73,39 @@ int main(void) {
 	//	num7 << " " << num8 << "\n" << endl;
 
 	// compound assignment addition with BigInt
-	num4 += num5;
+	//num4 += num5;
 
 	// compund assignment addition with long
-	num5 += 34;
+	//num5 += 34;
 
 	// assignment with long
-	num8 = 23;
+	//num8 = 23;
 
 	// binary addition: long + BigInt
-	num3 = 28 + num8;
+	//num3 = 28 + num8;
 
 	// perform some equality tests
-	bool bool1 = num7 == num8; // BigInt == BigInt
-	bool bool2 = num6 == num1; // BigInt == BigInt
-	bool bool3 = num1 == 4; // BigInt == long
-	bool bool4 = num2 == 60; // BigInt == long
-	bool bool5 = 4 == num1; // long == BigInt
-	bool bool6 = 60 == num2; // long == BigInt
+	//bool bool1 = num7 == num8; // BigInt == BigInt
+	//bool bool2 = num6 == num1; // BigInt == BigInt
+	//bool bool3 = num1 == 4; // BigInt == long
+	//bool bool4 = num2 == 60; // BigInt == long
+	//bool bool5 = 4 == num1; // long == BigInt
+	//bool bool6 = 60 == num2; // long == BigInt
 
 							 // print the values
-	cout << "Bool Values: " << bool1 << " " << bool2 << " " << bool3 << " " <<
-		bool4 << " " << bool5 << " " << bool6 << " " << "\n" << endl;
+	//cout << "Bool Values: " << bool1 << " " << bool2 << " " << bool3 << " " <<
+	//	bool4 << " " << bool5 << " " << bool6 << " " << "\n" << endl;
 
-	cout << "Num Values: " << num1 << " " << num2 << " " << num3 << " " <<
-		num4 << " " << num5 << " " << num6 << " " <<
-		num7 << " " << num8 << "\n" << endl;
+	//cout << "Num Values: " << num1 << " " << num2 << " " << num3 << " " <<
+	//	num4 << " " << num5 << " " << num6 << " " <<
+	//	num7 << " " << num8 << "\n" << endl;
 
 	// loop that computes a very large value
 	//
 	// with the dummied-up varsion, it overflows; in the completed
 	// implementation, it should actually compute the correct value
-	BigInt bigVal = 1234;
-	cout << "Big Val: " << bigVal << "\n" << endl;
+	//BigInt bigVal = 1234;
+	//cout << "Big Val: " << bigVal << "\n" << endl;
 	//for (BigInt i = 0; !(i == 35); i++) {
 	//	bigVal += bigVal;
 	//	bigVal += bigVal;

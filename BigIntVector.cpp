@@ -99,9 +99,9 @@ void BigIntVector::removeElementAt(long index)
 	vectorArray[vectorSize - 1] = 0;
 }
 
-//ostream& operator<<(std::ostream& os, const BigIntVector& vct)
-//{
-//	for (long i = 0; i < vct.vectorSize; i++)
-//		os << vct.vectorArray[0];
-//	return os;
-//}
+ostream& operator<<(std::ostream& os, const BigIntVector& vct)
+{
+	for (long i = 0; i < vct.vectorSize; i++)
+		os << vct.vectorArray[i];
+	return os;
+}
