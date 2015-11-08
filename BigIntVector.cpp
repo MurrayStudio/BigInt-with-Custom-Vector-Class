@@ -57,7 +57,7 @@ long BigIntVector::getSize() const
 	return vectorSize;
 }
 
-void BigIntVector::resize() {
+void BigIntVector::resizePlusOne() {
 
 	long *oldArray = vectorArray;
 
@@ -68,6 +68,21 @@ void BigIntVector::resize() {
 	}
 
 	vectorSize = vectorSize + 1;
+
+	delete[] oldArray;
+}
+
+void BigIntVector::resizeMinusOne() {
+
+	long *oldArray = vectorArray;
+
+	vectorArray = new long[vectorSize - 1];
+	//copy old array minus one at end
+	for (int k = 1; k < vectorSize; k++) {
+		vectorArray[k-1] = oldArray[k]; //end will be popped off
+	}
+
+	vectorSize = vectorSize - 1;
 
 	delete[] oldArray;
 }

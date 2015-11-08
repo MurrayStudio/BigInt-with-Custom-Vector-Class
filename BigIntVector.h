@@ -11,7 +11,8 @@ public:
 
 	long getSize() const; 
 	long getElementAt(long value) const; 
-	void resize();
+	void resizePlusOne();
+	void resizeMinusOne();
 
 	void setElementAt(long index, long value);
 	void removeElementAt(long index); 

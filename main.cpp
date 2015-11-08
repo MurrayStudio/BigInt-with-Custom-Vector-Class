@@ -58,6 +58,18 @@ int main(void) {
 
 	cout << "num7 (7): " << num7 << endl;
 
+	BigInt numD = 135;
+
+	cout << "numD (135): " << numD << endl;
+
+	BigInt numE = 118;
+
+	cout << "numD (118): " << numE << endl;
+
+	BigInt numF = numD - numE;
+
+	cout << "numF (17): " << numF << endl;
+
 	// postfix increment
 	//BigInt num7 = num3++;
 
