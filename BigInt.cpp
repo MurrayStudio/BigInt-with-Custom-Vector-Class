@@ -215,6 +215,7 @@ BigInt BigInt::operator-=(BigInt const& other) {
 	int otherCounter = other.bigIntVector->getSize() - 1; //keeps track if we are done getting digits from other array
 														 //cout << "otherCounter: " << otherCounter << endl;
 
+	//loops through both vectors doing digit subtraction
 	for (int i = maxSize - 1; i >= 0; i--) {
 		//cout << "element1: " << bigIntVector.getElementAt(i) << endl;
 		//cout << "element2: " << other.bigIntVector.getElementAt(i) << endl;
@@ -222,13 +223,24 @@ BigInt BigInt::operator-=(BigInt const& other) {
 		if (otherCounter >= 0) {
 			difference -= other.bigIntVector->getElementAt(i - sizeDifference); //move index if size is different
 			if (difference < 0) {
-				for (int y = i - sizeDifference - 1; y >= 0; y--) {
+				//begin looking for a 1 or higher to use in this bigIntVector
+				for (int y = i - 1; y >= 0; y--) {
 					int newElement = bigIntVector->getElementAt(y); //get number one index ahead
+					//if we have found a 1 or higher, take one off it
 					if (newElement > 0) {
 						newElement -= 1; //take one off newElement
-						bigIntVector->setElementAt(y, (newElement)); //apply the new newElement value to the index spot in other
+						bigIntVector->setElementAt(y, (newElement)); //apply the new newElement value at spot we found it
+						//loop through any 0's in between newElement and i
+						for (int z = y + 1; z <= i - 1; z++) {
+							int addToElement = bigIntVector->getElementAt(z);
+							addToElement += 9;
+							bigIntVector->setElementAt(z, addToElement); //add 9 to space
+						}
 						difference += 10; //add 10 to the difference
 						break;
+					}
+					if (newElement == 0 && y == 0) {
+						cout << "done" << endl;
 					}
 				}
 			}
@@ -238,11 +250,19 @@ BigInt BigInt::operator-=(BigInt const& other) {
 
 		--otherCounter; //only decrement otherCounter if we have reached 2nd vector elements
 
-		if (otherCounter < 0 && difference == 0) {
+		difference = 0;
+	}
+
+	//all 0's in front of this  bigIntVector should be sized down until non-zero is reached
+	int i = 0;
+	while (bigIntVector->getElementAt(i) == 0) {
+		if (bigIntVector->getSize() == 1) {
+			//don't resize because only 0 is there.
+		}
+		else {
 			bigIntVector->resizeMinusOne();
 		}
-
-		difference = 0;
+		i++;
 	}
 
 	return *this;
