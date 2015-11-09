@@ -103,9 +103,11 @@ BigInt BigInt::operator+=(BigInt const& other) {
 	//BigInt thisBigInt = *this;
 
 	if (!other.isPositive) {
-		//return thisBigInt -= other;
+		return *this -= other;
 	}
-	//possible check for both negative???
+	if (!isPositive) {
+		//return (other - *this);
+	}
 
 
 	int sum = 0; //holds the sum of the value in both vectors
@@ -189,24 +191,17 @@ BigInt BigInt::operator-(BigInt const& other) const {
 // compound subtraction-assignment operator
 BigInt BigInt::operator-=(BigInt const& other) {
 	if (!other.isPositive) {
-		//return thisBigInt -= other;
+		return BigInt(*this) += other;
 	}
 	//possible check for both negative???
 
 
 	int difference = 0; //holds the difference of the values in the i th place in both vectors
 	int maxSize = 0; //holds size of biggest BigInt
-	//int carry = 0; //holds carry over value
 	int sizeDifference = 0; //holds size difference between b and a if b is bigger
-
-							//check size
-	while (bigIntVector->getSize() < other.bigIntVector->getSize()) {
-		bigIntVector->resizePlusOne(); //increase size of first big int until it matches size of second
-	}
 
 	if (bigIntVector->getSize() > other.bigIntVector->getSize()) {
 		sizeDifference = bigIntVector->getSize() - other.bigIntVector->getSize();
-		//cout << "sizeDiff: " << sizeDifference << endl;
 	}
 
 	maxSize = bigIntVector->getSize();
@@ -238,9 +233,6 @@ BigInt BigInt::operator-=(BigInt const& other) {
 						difference += 10; //add 10 to the difference
 						break;
 					}
-					if (newElement == 0 && y == 0) {
-						cout << "done" << endl;
-					}
 				}
 			}
 		}
@@ -267,6 +259,31 @@ BigInt BigInt::operator-=(BigInt const& other) {
 	return *this;
 
 }
+
+// prefix '--' operator
+BigInt BigInt::operator--() {
+
+	return BigInt(*this) -= 1;
+
+	//BigInt thisBigInt = *this;
+	//thisBigInt += 1;
+
+	//return thisBigInt; //return a BigInt
+}
+
+// postfix '--' operator
+BigInt BigInt::operator--(int dummy) {
+	return --BigInt(*this); //AM I DOING THIS RIGHT?
+}
+
+// unary '-' operator
+BigInt BigInt::operator-() {
+
+	this->isPositive = false;
+
+	return *this;
+}
+
 
 // equality operator
 bool BigInt::operator==(BigInt const& other) const {

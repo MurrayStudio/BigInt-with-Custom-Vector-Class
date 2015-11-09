@@ -54,6 +54,7 @@ int main(void) {
 
 	cout << "num6 (13): " << num6 << endl;
 
+	//binary subtraction
 	BigInt num7 = num2 - num1;
 
 	cout << "num7 (7): " << num7 << endl;
@@ -66,6 +67,7 @@ int main(void) {
 
 	cout << "numE (998): " << numE << endl;
 
+	//binary subtraction
 	BigInt numF = numD - numE;
 
 	cout << "numF (102000114): " << numF << endl;
@@ -76,27 +78,60 @@ int main(void) {
 	cout << "num8 (32): " << num8 << endl;
 
 	// direct initialization
-	//BigInt num8 = num3;
+	BigInt num9 = num3;
 
-	// increment
-	//num3++;
+	cout << "num9 (31): " << num9 << endl;
 
-	//// print the values
-	//cout << "Num Values: " << num1 << " " << num2 << " " << num3 << " " <<
-	//	num4 << " " << num5 << " " << num6 << " " <<
-	//	num7 << " " << num8 << "\n" << endl;
+	// increment PROBLEM HERE!!!
+	num3++;
+
+	cout << "num3 (32): " << num3 << endl;
 
 	// compound assignment addition with BigInt
-	//num4 += num5;
+	num4 += num5;
+
+	cout << "num4 (52): " << num4 << endl;
 
 	// compund assignment addition with long
-	//num5 += 34;
+	num5 += 34;
+
+	cout << "num5 (53): " << num5 << endl;
 
 	// assignment with long
-	//num8 = 23;
+	num8 = 23;
+
+	cout << "num8 (23): " << num8 << endl;
 
 	// binary addition: long + BigInt
-	//num3 = 28 + num8;
+	num3 = 28 + num8;
+
+	cout << "num3 (51): " << num3 << endl;
+
+	BigInt num10 = 100;
+
+	cout << "num10 (100): " << num10 << endl;
+
+	//prefix --
+	num10 = --num10;
+
+	cout << "num10 (99): " << num10 << endl;
+
+	BigInt num11 = 30;
+
+	cout << "num11 (30): " << num11 << endl;
+
+	//num11 = -num11;
+
+	//cout << "num11 (-30): " << num11 << endl;
+
+	BigInt num12 = -40;
+
+	cout << "num12 (-40): " << num12 << endl;
+
+	BigInt num13 = num12 + num11;
+
+	cout << "num13 (-10): " << num11 << endl;
+
 
 	// perform some equality tests
 	//bool bool1 = num7 == num8; // BigInt == BigInt

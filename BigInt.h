@@ -51,7 +51,18 @@ public:
 	BigInt operator+=(BigInt const& other);
 
 	// binary subtraction
-	BigInt BigInt::operator-(BigInt const& other) const;
+	BigInt operator-(BigInt const& other) const;
+
+	// unary '-' operator
+	BigInt operator-();
+
+	// prefix '--' operator
+	BigInt operator--();
+
+	// postfix '--' operator
+	BigInt operator--(int dummy);
+
+	// compound subtraction-assignment operator
 	BigInt BigInt::operator-=(BigInt const& other);
 
 	// equality operation
