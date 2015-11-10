@@ -116,21 +116,21 @@ int main(void) {
 
 	cout << "num10 (99): " << num10 << endl;
 
-	BigInt num11 = 30;
+	BigInt num11 = -30;
 
-	cout << "num11 (30): " << num11 << endl;
+	cout << "num11 (-30): " << num11 << endl;
 
 	//num11 = -num11;
 
 	//cout << "num11 (-30): " << num11 << endl;
 
-	BigInt num12 = -40;
+	BigInt num12 = 40;
 
-	cout << "num12 (-40): " << num12 << endl;
+	cout << "num12 (40): " << num12 << endl;
 
 	BigInt num13 = num12 + num11;
 
-	cout << "num13 (-10): " << num11 << endl;
+	cout << "num13 (-10): " << num13 << endl;
 
 
 	// perform some equality tests

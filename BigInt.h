@@ -21,7 +21,6 @@ private:
 	BigIntVector *bigIntVector;
 	bool isPositive;
 	int base;
-	unsigned int skip;
 
 	long data; // our numeric data, for now
 
@@ -48,7 +47,7 @@ public:
 	BigInt operator++(int dummy);
 
 	// compound addition-assignment operator
-	BigInt operator+=(BigInt const& other);
+	BigInt& operator+=(BigInt const& other);
 
 	// binary subtraction
 	BigInt operator-(BigInt const& other) const;

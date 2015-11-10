@@ -22,7 +22,6 @@ using namespace std;
 BigInt::BigInt(BigInt const& orig)
 	: isPositive(orig.isPositive)
 	, base(orig.base)
-	, skip(orig.skip)
 {
 	//this->data = orig.data;
 	this->bigIntVector = new BigIntVector(*(orig.bigIntVector));
@@ -81,29 +80,25 @@ BigInt::~BigInt() {
 
 // binary addition
 BigInt BigInt::operator+(BigInt const& other) const {
-	//BigInt rtnVal(this->data + other.data);
 
+	BigInt tempThis = BigInt(*this);
+	tempThis += other;
+	return tempThis;
 
-	//BigInt temp(*this);
-	//return this += other;
+	//BigInt(*this) += other;
+	//cout << "get element at 0 +: " << BigInt(*this).bigIntVector->getElementAt(0) << endl;
+	//return BigInt(*this);
 
-	return BigInt(*this) += other;
-
-	//PROBLEM: I THINK YOU ARE MODIFYING NUM1 WHEN IT IS PASSED IN DIRECTLY BECAUSE CONSTRUCTOR ISSUES
-	//BigInt thisBigInt = *this;
-	//thisBigInt += other;
-
-	//return thisBigInt; //return a BigInt
 }
 
 // compound addition-assignment operator
-BigInt BigInt::operator+=(BigInt const& other) {
-	//return this->data = this->data + other.data;
-
-	//BigInt thisBigInt = *this;
+BigInt& BigInt::operator+=(BigInt const& other) {
 
 	if (!other.isPositive) {
-		return *this -= other;
+		//BigInt tempThis = BigInt(*this);
+		*this -= other;
+		return *this;
+		//return *this -= other;
 	}
 	if (!isPositive) {
 		//return (other - *this);
@@ -185,13 +180,16 @@ BigInt BigInt::operator+() const {
 // binary subtraction
 BigInt BigInt::operator-(BigInt const& other) const {
 
-	return BigInt(*this) -= other;
+	BigInt tempThis = BigInt(*this);
+	tempThis -= other;
+	return tempThis;
+	//return BigInt(*this) -= other;
 }
 
 // compound subtraction-assignment operator
 BigInt BigInt::operator-=(BigInt const& other) {
 	if (!other.isPositive) {
-		return BigInt(*this) += other;
+		//return BigInt(*this) += other;
 	}
 	//possible check for both negative???
 
