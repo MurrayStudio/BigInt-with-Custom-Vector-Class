@@ -67,6 +67,8 @@ void BigIntVector::resizePlusOne() {
 		vectorArray[k] = oldArray[k - 1]; //k-1 because old array is behind one index
 	}
 
+	vectorArray[0] = 0; //init first spot to 0 instead of garbage
+
 	vectorSize = vectorSize + 1;
 
 	delete[] oldArray;

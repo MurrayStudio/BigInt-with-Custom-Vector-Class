@@ -35,7 +35,7 @@ public:
 	~BigInt();
 
 	// binary '+' operator
-	BigInt operator+(BigInt const& other) const;
+	BigInt& operator+(BigInt const& other) const;
 
 	// unary '+' operator
 	BigInt operator+() const;
@@ -50,7 +50,7 @@ public:
 	BigInt& operator+=(BigInt const& other);
 
 	// binary subtraction
-	BigInt operator-(BigInt const& other) const;
+	BigInt& operator-(BigInt const& other) const;
 
 	// unary '-' operator
 	BigInt operator-();
@@ -65,7 +65,7 @@ public:
 	BigInt& BigInt::operator-=(BigInt const& other);
 
 	// binary '*' operator
-	BigInt operator*(BigInt const& other) const;
+	BigInt& operator*(BigInt const& other) const;
 
 	// compound multiple-assignment operator
 	BigInt& operator*=(BigInt const& other);

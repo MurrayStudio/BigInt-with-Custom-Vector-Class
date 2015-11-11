@@ -79,19 +79,20 @@ BigInt::~BigInt() {
 }
 
 // binary addition
-BigInt BigInt::operator+(BigInt const& other) const {
+BigInt& BigInt::operator+(BigInt const& other) const {
 
-	BigInt tempThis = BigInt(*this);
+	//BigInt tempThis = BigInt(*this);
+	BigInt* tempThis = new BigInt(*this);
 	//ex: 40 + (-30) = 10
 	if (!other.isPositive && this->isPositive && this->bigIntVector->getSize() >= other.bigIntVector->getSize()) {
 		//tempThis.isPositive = false;
 	}
 	//ex: -40 + 30 = -10
 	if (other.isPositive && !this->isPositive && this->bigIntVector->getSize() >= other.bigIntVector->getSize()) {
-		tempThis.isPositive = false;
+		tempThis->isPositive = false;
 	}
-	tempThis += other;
-	return tempThis;
+	*tempThis += other;
+	return *tempThis;
 
 	//BigInt(*this) += other;
 	//cout << "get element at 0 +: " << BigInt(*this).bigIntVector->getElementAt(0) << endl;
@@ -120,28 +121,30 @@ BigInt& BigInt::operator+=(BigInt const& other) {
 	int carry = 0; //holds carry over value
 	int sizeDifference = 0; //holds size difference between b and a if b is bigger
 
-	//check size
-	while (bigIntVector->getSize() < other.bigIntVector->getSize()) {
-		bigIntVector->resizePlusOne(); //increase size of first big int until it matches size of second
-	}
-
 	if (bigIntVector->getSize() > other.bigIntVector->getSize()) {
 		sizeDifference = bigIntVector->getSize() - other.bigIntVector->getSize();
 		//cout << "sizeDiff: " << sizeDifference << endl;
 	}
 
-	maxSize = bigIntVector->getSize();
+	//check size
+	while (bigIntVector->getSize() < other.bigIntVector->getSize()) {
+		bigIntVector->resizePlusOne(); //increase size of first big int until it matches size of second with new slots added in front of number
+	}
 
-	int otherCounter = other.bigIntVector->getSize() - 1; //keeps track if we are done getting digits from other array
+	maxSize = bigIntVector->getSize();
+	int otherCounter = other.bigIntVector->getSize() - 1; //keeps track if we are done getting digits from smaller array
+
+
 	//cout << "otherCounter: " << otherCounter << endl;
 
 	for (int i = maxSize - 1; i >= 0; i--) {
 		//cout << "element1: " << bigIntVector.getElementAt(i) << endl;
 		//cout << "element2: " << other.bigIntVector.getElementAt(i) << endl;
 		sum += bigIntVector->getElementAt(i);
+		sum += carry;
 		if (otherCounter >= 0) {
 			sum += other.bigIntVector->getElementAt(i - sizeDifference); //move index if size is different
-			sum += carry;
+			//sum += carry;
 			carry = 0;
 			//cout << "sum: " << sum << endl;
 			if (sum > 9) {
@@ -155,9 +158,18 @@ BigInt& BigInt::operator+=(BigInt const& other) {
 
 			--otherCounter; //only decrement otherCounter if we have reached 2nd vector elements
 		}
-		if (otherCounter < 0 && carry > 0) {
+		else {
+			bigIntVector->setElementAt(i, sum); //we have reached the end of other and don't need to % base
+			carry = 0; //this is so next if statement won't execute
+		}
+
+		//checks for the last computation of the last digit
+		if (otherCounter < 0 && carry > 0 && i == 0 && (((bigIntVector->getElementAt(0) + carry) > 9) || ((other.bigIntVector->getElementAt(0) + carry) > 9))) {
 			bigIntVector->resizePlusOne(); //increase size of big int
 			bigIntVector->setElementAt(i, carry); //set carry in front of sum spot
+		}
+		else {
+
 		}
 		sum = 0;
 	}
@@ -188,11 +200,11 @@ BigInt BigInt::operator+() const {
 }
 
 // binary subtraction
-BigInt BigInt::operator-(BigInt const& other) const {
+BigInt& BigInt::operator-(BigInt const& other) const {
 
-	BigInt tempThis = BigInt(*this);
-	tempThis -= other;
-	return tempThis;
+	BigInt* tempThis = new BigInt(*this);
+	*tempThis -= other;
+	return *tempThis;
 	//return BigInt(*this) -= other;
 }
 
@@ -292,11 +304,10 @@ BigInt BigInt::operator-() {
 	return *this;
 }
 
-
 // binary multiplication
-BigInt BigInt::operator*(BigInt const& other) const {
+BigInt& BigInt::operator*(BigInt const& other) const {
 
-	BigInt tempThis = BigInt(*this);
+	BigInt* tempThis = new BigInt(*this);
 	//ex: 40 + (-30) = 10
 	if (!other.isPositive && this->isPositive && this->bigIntVector->getSize() >= other.bigIntVector->getSize()) {
 		//tempThis.isPositive = false;
@@ -305,8 +316,8 @@ BigInt BigInt::operator*(BigInt const& other) const {
 	if (other.isPositive && !this->isPositive && this->bigIntVector->getSize() >= other.bigIntVector->getSize()) {
 		//tempThis.isPositive = false;
 	}
-	tempThis *= other;
-	return tempThis;
+	*tempThis *= other;
+	return *tempThis;
 
 	//BigInt(*this) += other;
 	//cout << "get element at 0 +: " << BigInt(*this).bigIntVector->getElementAt(0) << endl;
@@ -332,30 +343,39 @@ BigInt& BigInt::operator*=(BigInt const& other) {
 	int maxSize = 0; //holds size of other BigInt
 	int addNum = 0; //holds digit of other bigIntVector
 
+	//create temps so we can use value of BigInt before it is changed
+	//BigInt thisTemp = BigInt(*this);
+	BigInt otherTemp = BigInt(other); //make = to 0;
+	BigInt sum = 0;
+
 	maxSize = other.bigIntVector->getSize();
 
-	//we iterate through the digits in other
-	for (int i = maxSize - 1; i >= 0; i--) {
-		
+	BigInt* y = new BigInt(79);
 
-		//if (*this < other)
-		//{
-		//	smallNum = this;
-		//	bigNum = &other;
-		//}
-		//else
-		//{
-		//	smallNum = &other;
-		//	bigNum = this;
-		//}
+	cout << "bool otherTemp: " << (*y < otherTemp) << endl;
 
-		//for (BigInt i = 1; i <= *smallNum; ++i) {
-		//	sum += *bigNum;
-		//}
+	BigInt* z = new BigInt(1);
 
+	*y = *y + *z;
+
+	cout << "otherTemp element 0: " << otherTemp.bigIntVector->getElementAt(0) << endl;
+	cout << "otherTemp element 1: " << otherTemp.bigIntVector->getElementAt(1) << endl;
+	cout << "y element 0: " << y->bigIntVector->getElementAt(0) << endl;
+	cout << "y element 1: " << y->bigIntVector->getElementAt(1) << endl;
+
+	cout << "bool otherTemp: " << (*y < otherTemp) << endl;
+
+
+	//cout << "init sum element 0: " << sum.bigIntVector->getElementAt(0) << endl;
+	for (BigInt i = 0; i < otherTemp; i = i + 1) {
+		//cout << "i element 0: " << i.bigIntVector->getElementAt(0) << endl;
+		//cout << "sum element 0: " << sum.bigIntVector->getElementAt(0) << endl;
+		//cout << "sum element 1: " << sum.bigIntVector->getElementAt(1) << endl;
+		sum += *this;
 	}
 
 	//*this += *this;
+	*this = sum;
 
 	return *this;
 
@@ -363,7 +383,7 @@ BigInt& BigInt::operator*=(BigInt const& other) {
 
 //Compare two BigInts
 //0 this == other || -1 this < other || 1 this > other
-int BigInt::compare(BigInt const& other) const 
+int BigInt::compare(BigInt const& other) const
 {
 	if (isPositive && !other.isPositive) {
 		return 1;
@@ -388,7 +408,7 @@ int BigInt::compare(BigInt const& other) const
 
 	maxSize = bigIntVector->getSize();
 
-	for (int i = maxSize - 1; i >= 0; i--) {
+	for (int i = 0; i < maxSize; i++) {
 		if (bigIntVector->getElementAt(i) < other.bigIntVector->getElementAt(i)) {
 			return -1;
 		}
@@ -426,7 +446,7 @@ bool BigInt::operator>=(BigInt const& other) const
 
 // equality operator
 bool BigInt::operator==(BigInt const& other) const {
-	
+
 	return compare(other) == 0; //0 this == other || -1 this < other || 1 this > other
 }
 
