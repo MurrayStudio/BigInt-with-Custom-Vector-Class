@@ -12,10 +12,10 @@ using namespace std;
 int main(void) {
 
 	// object with explicit constructor from long
-	BigInt num1(21000);
+	BigInt num1(9);
 
 	// object with implicit constructor from long
-	BigInt num2 = 21;
+	BigInt num2 = 1;
 
 	// binary addition BigInt+BigInt
 	BigInt num3 = num1 + num2;

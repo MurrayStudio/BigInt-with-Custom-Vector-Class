@@ -168,9 +168,6 @@ BigInt& BigInt::operator+=(BigInt const& other) {
 			bigIntVector->resizePlusOne(); //increase size of big int
 			bigIntVector->setElementAt(i, carry); //set carry in front of sum spot
 		}
-		else {
-
-		}
 		sum = 0;
 	}
 
@@ -350,20 +347,20 @@ BigInt& BigInt::operator*=(BigInt const& other) {
 
 	maxSize = other.bigIntVector->getSize();
 
-	BigInt* y = new BigInt(79);
+	BigInt y = 9;
 
-	cout << "bool otherTemp: " << (*y < otherTemp) << endl;
+	cout << "bool otherTemp: " << (y < otherTemp) << endl;
 
-	BigInt* z = new BigInt(1);
+	BigInt z = 1;
 
-	*y = *y + *z;
+	y = y + z;
 
 	cout << "otherTemp element 0: " << otherTemp.bigIntVector->getElementAt(0) << endl;
 	cout << "otherTemp element 1: " << otherTemp.bigIntVector->getElementAt(1) << endl;
-	cout << "y element 0: " << y->bigIntVector->getElementAt(0) << endl;
-	cout << "y element 1: " << y->bigIntVector->getElementAt(1) << endl;
+	cout << "y element 0: " << y.bigIntVector->getElementAt(0) << endl;
+	cout << "y element 1: " << y.bigIntVector->getElementAt(1) << endl;
 
-	cout << "bool otherTemp: " << (*y < otherTemp) << endl;
+	cout << "bool otherTemp: " << (y < otherTemp) << endl;
 
 
 	//cout << "init sum element 0: " << sum.bigIntVector->getElementAt(0) << endl;
