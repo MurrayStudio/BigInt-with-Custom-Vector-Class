@@ -130,11 +130,69 @@ int main(void) {
 
 	BigInt num13 = num12 + num11;
 
-	cout << "num13 (-10): " << num13 << endl;
+	cout << "num13 (10): " << num13 << endl;
+
+	BigInt num14 = -40;
+
+	cout << "num14 (-40): " << num14 << endl;
+
+	BigInt num15 = 30;
+
+	cout << "num15 (30): " << num15 << endl;
+
+	BigInt num16 = num14 + num15;
+
+	cout << "num16 (-10): " << num16 << endl;
+
+	BigInt num17 = 5;
+
+	cout << "num17 (5): " << num17 << endl;
+
+	BigInt num18 = 81;
+
+	cout << "num18 (81): " << num18 << endl;
+
+	BigInt num19 = 5 * 81;
+
+	cout << "num19 (405): " << num19 << endl;
+
+	BigInt num20 = 5;
+
+	cout << "num20 (10): " << num20 << endl;
+
+	BigInt num21 = 1;
+
+	for (int i = 0; i < 20; i++) {
+		//cout << "num21 (BigInt): " << num21 << endl;
+		num21 *= num20;
+	}
+
+	cout << "num21 (BigInt): " << num21 << endl;
 
 
-	// perform some equality tests
-	//bool bool1 = num7 == num8; // BigInt == BigInt
+	BigInt boolNum = 10;
+	BigInt boolNum2 = 11;
+	BigInt boolNum3 = 10;
+
+	// perform some equality tests where 1 = true and 0 = false
+	bool bool1 = boolNum == boolNum2; 
+
+	cout << "bool1 (1): " << bool1 << endl;
+
+	bool bool2 = boolNum < boolNum2; 
+
+	cout << "bool2 (1): " << bool2 << endl;
+
+	bool bool3 = boolNum > boolNum2;
+
+	cout << "bool3 (0): " << bool3 << endl;
+
+	bool bool4 = boolNum >= boolNum3;
+
+	cout << "bool4 (1): " << bool4 << endl;
+
+	//cout << "bool2 (0): " << bool1 << endl;
+
 	//bool bool2 = num6 == num1; // BigInt == BigInt
 	//bool bool3 = num1 == 4; // BigInt == long
 	//bool bool4 = num2 == 60; // BigInt == long

@@ -82,6 +82,14 @@ BigInt::~BigInt() {
 BigInt BigInt::operator+(BigInt const& other) const {
 
 	BigInt tempThis = BigInt(*this);
+	//ex: 40 + (-30) = 10
+	if (!other.isPositive && this->isPositive && this->bigIntVector->getSize() >= other.bigIntVector->getSize()) {
+		//tempThis.isPositive = false;
+	}
+	//ex: -40 + 30 = -10
+	if (other.isPositive && !this->isPositive && this->bigIntVector->getSize() >= other.bigIntVector->getSize()) {
+		tempThis.isPositive = false;
+	}
 	tempThis += other;
 	return tempThis;
 
@@ -94,6 +102,7 @@ BigInt BigInt::operator+(BigInt const& other) const {
 // compound addition-assignment operator
 BigInt& BigInt::operator+=(BigInt const& other) {
 
+	//not prepared for size yet!!!!!!!
 	if (!other.isPositive) {
 		//BigInt tempThis = BigInt(*this);
 		*this -= other;
@@ -101,7 +110,8 @@ BigInt& BigInt::operator+=(BigInt const& other) {
 		//return *this -= other;
 	}
 	if (!isPositive) {
-		//return (other - *this);
+		*this -= other;
+		return *this;
 	}
 
 
@@ -187,7 +197,7 @@ BigInt BigInt::operator-(BigInt const& other) const {
 }
 
 // compound subtraction-assignment operator
-BigInt BigInt::operator-=(BigInt const& other) {
+BigInt& BigInt::operator-=(BigInt const& other) {
 	if (!other.isPositive) {
 		//return BigInt(*this) += other;
 	}
@@ -283,9 +293,141 @@ BigInt BigInt::operator-() {
 }
 
 
+// binary multiplication
+BigInt BigInt::operator*(BigInt const& other) const {
+
+	BigInt tempThis = BigInt(*this);
+	//ex: 40 + (-30) = 10
+	if (!other.isPositive && this->isPositive && this->bigIntVector->getSize() >= other.bigIntVector->getSize()) {
+		//tempThis.isPositive = false;
+	}
+	//ex: -40 + 30 = -10
+	if (other.isPositive && !this->isPositive && this->bigIntVector->getSize() >= other.bigIntVector->getSize()) {
+		//tempThis.isPositive = false;
+	}
+	tempThis *= other;
+	return tempThis;
+
+	//BigInt(*this) += other;
+	//cout << "get element at 0 +: " << BigInt(*this).bigIntVector->getElementAt(0) << endl;
+	//return BigInt(*this);
+
+}
+
+// compound multiplication-assignment operator
+BigInt& BigInt::operator*=(BigInt const& other) {
+
+	//not prepared for size yet!!!!!!!
+	if (!other.isPositive) {
+		//BigInt tempThis = BigInt(*this);
+		//*this -= other;
+		//return *this;
+		//return *this -= other;
+	}
+	if (!isPositive) {
+		//*this -= other;
+		//return *this;
+	}
+
+	int maxSize = 0; //holds size of other BigInt
+	int addNum = 0; //holds digit of other bigIntVector
+
+	maxSize = other.bigIntVector->getSize();
+
+	//we iterate through the digits in other
+	for (int i = maxSize - 1; i >= 0; i--) {
+		
+
+		//if (*this < other)
+		//{
+		//	smallNum = this;
+		//	bigNum = &other;
+		//}
+		//else
+		//{
+		//	smallNum = &other;
+		//	bigNum = this;
+		//}
+
+		//for (BigInt i = 1; i <= *smallNum; ++i) {
+		//	sum += *bigNum;
+		//}
+
+	}
+
+	//*this += *this;
+
+	return *this;
+
+}
+
+//Compare two BigInts
+//0 this == other || -1 this < other || 1 this > other
+int BigInt::compare(BigInt const& other) const 
+{
+	if (isPositive && !other.isPositive) {
+		return 1;
+	}
+	if (!isPositive && other.isPositive) {
+		return -1;
+	}
+
+	//int check = 1;
+	//if (!isPositive && !other.isPositive) {
+	//	check = -1;
+	//}
+
+	if (bigIntVector->getSize() < other.bigIntVector->getSize()) {
+		return -1;
+	}
+	if (bigIntVector->getSize() > other.bigIntVector->getSize()) {
+		return 1;
+	}
+
+	int maxSize = 0; //holds size of the equaled size vectors
+
+	maxSize = bigIntVector->getSize();
+
+	for (int i = maxSize - 1; i >= 0; i--) {
+		if (bigIntVector->getElementAt(i) < other.bigIntVector->getElementAt(i)) {
+			return -1;
+		}
+		if (bigIntVector->getElementAt(i) > other.bigIntVector->getElementAt(i)) {
+			return 1;
+		}
+	}
+
+	return 0; // they are equals
+}
+
+bool BigInt::operator<(BigInt const& other) const
+{
+	return compare(other) == -1; //0 this == other || -1 this < other || 1 this > other
+}
+
+bool BigInt::operator<=(BigInt const& other) const
+{
+	int compared = compare(other);
+
+	return compared == 0 || compared == -1; //0 this == other || -1 this < other || 1 this > other
+}
+
+bool BigInt::operator>(BigInt const& other) const
+{
+	return compare(other) == 1; //0 this == other || -1 this < other || 1 this > other
+}
+
+bool BigInt::operator>=(BigInt const& other) const
+{
+	int compared = compare(other);
+
+	return compared == 0 || compared == 1; //0 this == other || -1 this < other || 1 this > other
+}
+
 // equality operator
 bool BigInt::operator==(BigInt const& other) const {
-	return this->data == other.data;
+	
+	return compare(other) == 0; //0 this == other || -1 this < other || 1 this > other
 }
 
 // output-stream operator for BigInt (non-member function)

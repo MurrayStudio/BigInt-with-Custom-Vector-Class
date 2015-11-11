@@ -62,7 +62,23 @@ public:
 	BigInt operator--(int dummy);
 
 	// compound subtraction-assignment operator
-	BigInt BigInt::operator-=(BigInt const& other);
+	BigInt& BigInt::operator-=(BigInt const& other);
+
+	// binary '*' operator
+	BigInt operator*(BigInt const& other) const;
+
+	// compound multiple-assignment operator
+	BigInt& operator*=(BigInt const& other);
+
+	int BigInt::compare(BigInt const& other) const;
+
+	bool operator<(BigInt const& other) const;
+
+	bool operator<=(BigInt const& other) const;
+
+	bool operator>(BigInt const& other) const;
+
+	bool operator>=(BigInt const& other) const;
 
 	// equality operation
 	bool operator==(BigInt const& other) const;
@@ -72,7 +88,7 @@ public:
 };
 
 // addition operator where left operand is a long
-inline BigInt operator+(long num, BigInt const& val) {
+inline BigInt operator+(long num, BigInt const& val) { //IMPORTANT
 	return val + num;
 }
 // equality operator where left operand is a long
