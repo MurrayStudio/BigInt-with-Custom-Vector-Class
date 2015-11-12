@@ -112,7 +112,7 @@ int main(void) {
 
 	cout << "bool5 (1): " << bool5 << endl;
 
-	bool bool6 = boolNum == 5; // BigInt == long
+	bool bool6 = 10 == boolNum; // long == BigInt
 
 	cout << "bool6 (1): " << bool6 << endl;
 

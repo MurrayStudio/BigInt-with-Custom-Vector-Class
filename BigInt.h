@@ -72,6 +72,9 @@ public:
 
 	int BigInt::compare(BigInt const& other) const;
 
+	// left hand side is long compare
+	int BigInt::compare(BigInt const& numBigInt, BigInt const& other) const;
+
 	bool operator<(BigInt const& other) const;
 
 	bool operator<=(BigInt const& other) const;
@@ -97,8 +100,10 @@ inline BigInt operator+(long num, BigInt const& val) { //IMPORTANT
 }
 // equality operator where left operand is a long
 inline bool operator==(long num, BigInt const& val) {
+
+	BigInt numBigInt = num;
 	
-	compare(val);
+	return val.compare(numBigInt, val) == 0;
 	
 	//return val == num;
 }

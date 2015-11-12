@@ -415,6 +415,45 @@ int BigInt::compare(BigInt const& other) const
 	return 0; // they are equals
 }
 
+//Compare two BigInts with no this
+//0 this == other || -1 this < other || 1 this > other
+int BigInt::compare(BigInt const& numBigInt, BigInt const& other) const
+{
+	if (numBigInt.isPositive && !other.isPositive) {
+		return 1;
+	}
+	if (!numBigInt.isPositive && other.isPositive) {
+		return -1;
+	}
+
+	//int check = 1;
+	//if (!isPositive && !other.isPositive) {
+	//	check = -1;
+	//}
+
+	if (numBigInt.bigIntVector->getSize() < other.bigIntVector->getSize()) {
+		return -1;
+	}
+	if (numBigInt.bigIntVector->getSize() > other.bigIntVector->getSize()) {
+		return 1;
+	}
+
+	int maxSize = 0; //holds size of the equaled size vectors
+
+	maxSize = numBigInt.bigIntVector->getSize();
+
+	for (int i = 0; i < maxSize; i++) {
+		if (numBigInt.bigIntVector->getElementAt(i) < other.bigIntVector->getElementAt(i)) {
+			return -1;
+		}
+		if (numBigInt.bigIntVector->getElementAt(i) > other.bigIntVector->getElementAt(i)) {
+			return 1;
+		}
+	}
+
+	return 0; // they are equals
+}
+
 bool BigInt::operator<(BigInt const& other) const
 {
 	return compare(other) == -1; //0 this == other || -1 this < other || 1 this > other
