@@ -12,15 +12,15 @@ using namespace std;
 int main(void) {
 
 	// object with explicit constructor from long
-	BigInt num1(9);
+	BigInt num1(9140);
 
 	// object with implicit constructor from long
-	BigInt num2 = 1;
+	BigInt num2 = 870;
 
 	// binary addition BigInt+BigInt
 	BigInt num3 = num1 + num2;
 
-	cout << "num3 (10793): " << num3 << endl;
+	cout << "num3 (10010): " << num3 << endl;
 
 	BigInt numA = 99999;
 
@@ -29,7 +29,7 @@ int main(void) {
 	BigInt numB = 99999;
 
 	cout << "numB (99999): " << numB << endl;
-	
+
 	BigInt numC = numA + numB;
 
 	cout << "numC (199998): " << numC << endl;
@@ -40,6 +40,31 @@ int main(void) {
 	BigInt num6 = num4 * num5;
 
 	cout << "num6 (50): " << num6 << endl;
+
+	BigInt num7 = 1;
+
+	for (int i = 0; i < 100; i++) {
+
+		//cout << "num7 (5): " << num7 << endl;
+
+		num7 *= num4;
+
+	}
+
+	cout << "num7 (5^100): " << num7 << endl;
+
+	BigInt num8 = 1;
+
+
+	for (BigInt i = 30; i > 0; i = i - 1) {
+
+		//cout << "num8 (___): " << num8 << endl;
+
+		num8 *= i;
+
+	}
+
+	cout << "num8 (30!): " << num8 << endl;
 
 	//BigInt boolNum = 10;
 	//BigInt boolNum2 = 11;

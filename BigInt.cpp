@@ -159,12 +159,34 @@ BigInt& BigInt::operator+=(BigInt const& other) {
 			--otherCounter; //only decrement otherCounter if we have reached 2nd vector elements
 		}
 		else {
-			bigIntVector->setElementAt(i, sum); //we have reached the end of other and don't need to % base
-			carry = 0; //this is so next if statement won't execute
+			carry = 0; //keep here
+
+			if (sum > 9) {
+				++carry;
+				bigIntVector->setElementAt(i, sum%base);
+			}
+			else {
+				bigIntVector->setElementAt(i, sum%base);
+			}
+
+			//if (sum > 9) {
+			//	bigIntVector->setElementAt(i, sum%base); //we have reached the end of other
+			//	bigIntVector->resizePlusOne(); //increase size of big int
+			//	//bigIntVector->setElementAt(i, carry); //set carry in front of sum spot
+			//}
+			//else {
+			//	bigIntVector->setElementAt(i, sum%base); //we have reached the end of other
+			//}
+			//carry = 0; //this is so next if statement won't execute
 		}
 
-		//checks for the last computation of the last digit
-		if (otherCounter < 0 && carry > 0 && i == 0 && (((bigIntVector->getElementAt(0) + carry) > 9) || ((other.bigIntVector->getElementAt(0) + carry) > 9))) {
+		////checks for the last computation of the last digit
+		//if (otherCounter < 0 && carry > 0 && i == 0 && (((bigIntVector->getElementAt(0) + carry) > 9) || ((other.bigIntVector->getElementAt(0) + carry) > 9))) {
+		//	bigIntVector->resizePlusOne(); //increase size of big int
+		//	bigIntVector->setElementAt(i, carry); //set carry in front of sum spot
+		//}
+		// && (bigIntVector->getSize() == other.bigIntVector->getSize())
+		if (otherCounter < 0 && carry > 0 && i == 0) {
 			bigIntVector->resizePlusOne(); //increase size of big int
 			bigIntVector->setElementAt(i, carry); //set carry in front of sum spot
 		}
@@ -337,37 +359,13 @@ BigInt& BigInt::operator*=(BigInt const& other) {
 		//return *this;
 	}
 
-	int maxSize = 0; //holds size of other BigInt
-	int addNum = 0; //holds digit of other bigIntVector
-
 	//create temps so we can use value of BigInt before it is changed
 	//BigInt thisTemp = BigInt(*this);
 	BigInt otherTemp = BigInt(other); //make = to 0;
 	BigInt sum = 0;
 
-	maxSize = other.bigIntVector->getSize();
-
-	BigInt y = 9;
-
-	cout << "bool otherTemp: " << (y < otherTemp) << endl;
-
-	BigInt z = 1;
-
-	y = y + z;
-
-	cout << "otherTemp element 0: " << otherTemp.bigIntVector->getElementAt(0) << endl;
-	cout << "otherTemp element 1: " << otherTemp.bigIntVector->getElementAt(1) << endl;
-	cout << "y element 0: " << y.bigIntVector->getElementAt(0) << endl;
-	cout << "y element 1: " << y.bigIntVector->getElementAt(1) << endl;
-
-	cout << "bool otherTemp: " << (y < otherTemp) << endl;
-
-
-	//cout << "init sum element 0: " << sum.bigIntVector->getElementAt(0) << endl;
 	for (BigInt i = 0; i < otherTemp; i = i + 1) {
-		//cout << "i element 0: " << i.bigIntVector->getElementAt(0) << endl;
-		//cout << "sum element 0: " << sum.bigIntVector->getElementAt(0) << endl;
-		//cout << "sum element 1: " << sum.bigIntVector->getElementAt(1) << endl;
+		//cout << "sum: " << sum << endl;
 		sum += *this;
 	}
 
