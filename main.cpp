@@ -11,6 +11,8 @@ using namespace std;
 
 int main(void) {
 
+	//****ADDING****
+
 	// object with explicit constructor from long
 	BigInt num1(9140);
 
@@ -34,18 +36,20 @@ int main(void) {
 
 	cout << "numC (199998): " << numC << endl;
 
+
+	//****MULTIPLICATION****
+
+
 	BigInt num4 = 5;
-	BigInt num5 = 10;
+	BigInt num5 = 100;
 
 	BigInt num6 = num4 * num5;
 
-	cout << "num6 (50): " << num6 << endl;
+	cout << "num6 (500): " << num6 << endl;
 
 	BigInt num7 = 1;
 
 	for (int i = 0; i < 100; i++) {
-
-		//cout << "num7 (5): " << num7 << endl;
 
 		num7 *= num4;
 
@@ -58,42 +62,63 @@ int main(void) {
 
 	for (BigInt i = 30; i > 0; i = i - 1) {
 
-		//cout << "num8 (___): " << num8 << endl;
-
 		num8 *= i;
 
 	}
 
 	cout << "num8 (30!): " << num8 << endl;
 
-	//BigInt boolNum = 10;
-	//BigInt boolNum2 = 11;
-	//BigInt boolNum3 = 10;
-	//BigInt boolNum4 = 79;
-	//BigInt boolNum5 = 81;
+	//****SUBTRACTION****
 
-	//// perform some equality tests where 1 = true and 0 = false
-	//bool bool1 = boolNum == boolNum2; 
+	BigInt num9 = 199;
+	BigInt num10 = 100;
 
-	//cout << "bool1 (1): " << bool1 << endl;
+	BigInt num11 = num9 - num10;
 
-	//bool bool2 = boolNum < boolNum2; 
+	cout << "num11 (99): " << num11 << endl;
 
-	//cout << "bool2 (1): " << bool2 << endl;
+	BigInt num12 = 2;
+	
+	num8 -= num12;
 
-	//bool bool3 = boolNum > boolNum2;
+	cout << "num8 (30! - 1): " << num8 << endl;
 
-	//cout << "bool3 (0): " << bool3 << endl;
+	//****Boolean****
 
-	//bool bool4 = boolNum >= boolNum3;
+	BigInt boolNum = 10;
+	BigInt boolNum2 = 11;
+	BigInt boolNum3 = 10;
+	BigInt boolNum4 = 79;
+	BigInt boolNum5 = 81;
 
-	//cout << "bool4 (1): " << bool4 << endl;
+	// perform some equality tests where 1 = true and 0 = false
+	bool bool1 = boolNum == boolNum3; 
 
-	//bool bool5 = boolNum4 < boolNum5;
+	cout << "bool1 (0): " << bool1 << endl;
 
-	//cout << "bool5 (1): " << bool5 << endl;
+	bool bool2 = boolNum < boolNum2; 
 
-	//cout << "bool2 (0): " << bool1 << endl;
+	cout << "bool2 (1): " << bool2 << endl;
+
+	bool bool3 = boolNum > boolNum2;
+
+	cout << "bool3 (0): " << bool3 << endl;
+
+	bool bool4 = boolNum >= boolNum3;
+
+	cout << "bool4 (1): " << bool4 << endl;
+
+	bool bool5 = boolNum4 < boolNum5;
+
+	cout << "bool5 (1): " << bool5 << endl;
+
+	bool bool6 = boolNum == 5; // BigInt == long
+
+	cout << "bool6 (1): " << bool6 << endl;
+
+	//bool bool7 = 9 < boolNum; // BigInt == long
+
+	//cout << "bool7 (1): " << bool7 << endl;
 
 	//bool bool2 = num6 == num1; // BigInt == BigInt
 	//bool bool3 = num1 == 4; // BigInt == long

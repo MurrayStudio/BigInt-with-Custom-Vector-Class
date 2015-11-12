@@ -83,6 +83,10 @@ public:
 	// equality operation
 	bool operator==(BigInt const& other) const;
 
+	//****Long Operations****
+
+	bool operator==(long num) const;
+
 	// output-stream operator for BigInt (non-member function)
 	friend std::ostream & operator<<(std::ostream& os, BigInt& num);
 };
@@ -93,7 +97,10 @@ inline BigInt operator+(long num, BigInt const& val) { //IMPORTANT
 }
 // equality operator where left operand is a long
 inline bool operator==(long num, BigInt const& val) {
-	return val == num;
+	
+	compare(val);
+	
+	//return val == num;
 }
 
 #endif

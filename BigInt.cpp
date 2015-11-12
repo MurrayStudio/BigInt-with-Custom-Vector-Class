@@ -445,6 +445,16 @@ bool BigInt::operator==(BigInt const& other) const {
 	return compare(other) == 0; //0 this == other || -1 this < other || 1 this > other
 }
 
+//****LONG OPERATIONS****
+
+// equality operator for long on right side
+bool BigInt::operator==(long num) const {
+
+	BigInt bigIntOther = BigInt(num);
+
+	return compare(num) == 0; //0 this == other || -1 this < other || 1 this > other
+}
+
 // output-stream operator for BigInt (non-member function)
 ostream & operator<<(ostream& os, BigInt& num) {
 
