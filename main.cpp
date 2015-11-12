@@ -116,6 +116,18 @@ int main(void) {
 
 	cout << "bool6 (1): " << bool6 << endl;
 
+	bool bool7 = 9 > boolNum; // long > BigInt
+
+	cout << "bool7 (0): " << bool7 << endl;
+
+	bool bool8 = boolNum == 10; // BigInt == long
+
+	cout << "bool8 (1): " << bool8 << endl;
+
+	bool bool9 = boolNum >= 11; //  BigInt >= long
+
+	cout << "bool9 (0): " << bool9 << endl;
+
 	//bool bool7 = 9 < boolNum; // BigInt == long
 
 	//cout << "bool7 (1): " << bool7 << endl;

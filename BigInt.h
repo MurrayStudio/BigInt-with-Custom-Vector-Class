@@ -86,13 +86,23 @@ public:
 	// equality operation
 	bool operator==(BigInt const& other) const;
 
-	//****Long Operations****
+	//****Long Operations on right****
+	bool operator<(long num) const;
+
+	bool operator<=(long num) const;
+
+	bool operator>(long num) const;
+
+	bool operator>=(long num) const;
 
 	bool operator==(long num) const;
 
 	// output-stream operator for BigInt (non-member function)
 	friend std::ostream & operator<<(std::ostream& os, BigInt& num);
 };
+
+
+//****LONG OPERATIONS ON LEFT****
 
 // addition operator where left operand is a long
 inline BigInt operator+(long num, BigInt const& val) { //IMPORTANT
@@ -103,10 +113,46 @@ inline bool operator==(long num, BigInt const& val) {
 
 	BigInt numBigInt = num;
 	
-	return val.compare(numBigInt, val) == 0;
-	
-	//return val == num;
+	return val.compare(numBigInt, val) == 0; //0 this == other || -1 this < other || 1 this > other
 }
+
+// < operator where left operand is a long
+inline bool operator<(long num, BigInt const& val) {
+
+	BigInt numBigInt = num;
+
+	return val.compare(numBigInt, val) == -1; //0 this == other || -1 this < other || 1 this > other
+}
+
+// <= operator where left operand is a long
+inline bool operator<=(long num, BigInt const& val) {
+
+	BigInt numBigInt = num;
+
+	int compared = val.compare(numBigInt, val);
+
+	return compared == -1 || compared == 0; //0 this == other || -1 this < other || 1 this > other
+}
+
+// > operator where left operand is a long
+inline bool operator>(long num, BigInt const& val) {
+
+	BigInt numBigInt = num;
+
+	return val.compare(numBigInt, val) == 1; //0 this == other || -1 this < other || 1 this > other
+}
+
+// >= operator where left operand is a long
+inline bool operator>=(long num, BigInt const& val) {
+
+	BigInt numBigInt = num;
+
+	int compared = val.compare(numBigInt, val);
+
+	return compared == 1 || compared == 0; //0 this == other || -1 this < other || 1 this > other
+}
+
+
 
 #endif
 
