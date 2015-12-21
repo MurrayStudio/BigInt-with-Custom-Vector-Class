@@ -1,3 +1,5 @@
+//Author: Shamus Murray
+
 /****************************************************************
 * BigInt.h -- include-file for big integer package
 ****************************************************************/
@@ -10,19 +12,15 @@
 /*****************************************************************
 * BigInt class
 *
-* Presently dummied up:
-* - does not implement integer values larger than the 'long' data
-*   type
-* - only operations related to '+' and '==' operator are defined
+* All operators required for assignment successfully overloaded for
+* the BigInt class.
 *
 *****************************************************************/
 class BigInt {
 private:
-	BigIntVector *bigIntVector;
-	bool isPositive;
-	int base;
-
-	long data; // our numeric data, for now
+	BigIntVector *bigIntVector; //custom vector for BigInt
+	bool isPositive; //is BigInt positive
+	int base; //holds base (should always be 10)
 
 public:
 	// copy constructor
@@ -38,13 +36,13 @@ public:
 	BigInt& operator+(BigInt const& other) const;
 
 	// unary '+' operator
-	BigInt operator+() const;
+	BigInt& operator+() const;
 
 	// prefix '++' operator
-	BigInt operator++();
+	BigInt& operator++();
 
 	// postfix '++' operator
-	BigInt operator++(int dummy);
+	BigInt& operator++(int dummy);
 
 	// compound addition-assignment operator
 	BigInt& operator+=(BigInt const& other);
@@ -53,16 +51,16 @@ public:
 	BigInt& operator-(BigInt const& other) const;
 
 	// unary '-' operator
-	BigInt operator-();
+	BigInt& operator-();
 
 	// prefix '--' operator
-	BigInt operator--();
+	BigInt& operator--();
 
 	// postfix '--' operator
-	BigInt operator--(int dummy);
+	BigInt& operator--(int dummy);
 
 	// compound subtraction-assignment operator
-	BigInt& BigInt::operator-=(BigInt const& other);
+	BigInt& operator-=(BigInt const& other);
 
 	// binary '*' operator
 	BigInt& operator*(BigInt const& other) const;
@@ -70,31 +68,41 @@ public:
 	// compound multiple-assignment operator
 	BigInt& operator*=(BigInt const& other);
 
-	int BigInt::compare(BigInt const& other) const;
+	int compare(BigInt const& other) const;
 
 	// left hand side is long compare
-	int BigInt::compare(BigInt const& numBigInt, BigInt const& other) const;
+	int compare(BigInt const& numBigInt, BigInt const& other) const;
 
+	//less than operator for BigInt
 	bool operator<(BigInt const& other) const;
 
+	//less than or equal to operator for BigInt
 	bool operator<=(BigInt const& other) const;
 
+	//greater than operator for BigInt
 	bool operator>(BigInt const& other) const;
 
+	//greater than or equal to operator for BigInt
 	bool operator>=(BigInt const& other) const;
 
-	// equality operation
+	//equality operator for BigInt
 	bool operator==(BigInt const& other) const;
 
 	//****Long Operations on right****
+
+	//less than operator for BigInt and long
 	bool operator<(long num) const;
 
+	//less than or equal to operator for BigInt and long
 	bool operator<=(long num) const;
 
+	//greater than operator for BigInt and long
 	bool operator>(long num) const;
 
+	//greater than or equal to operator for BigInt for long
 	bool operator>=(long num) const;
 
+	//equality operator for BigInt and long
 	bool operator==(long num) const;
 
 	// output-stream operator for BigInt (non-member function)
@@ -104,22 +112,35 @@ public:
 
 //****LONG OPERATIONS ON LEFT****
 
-// addition operator where left operand is a long
-inline BigInt operator+(long num, BigInt const& val) { //IMPORTANT
-	return val + num;
+//addition operator where left operand is a long
+inline BigInt operator+(long num, BigInt const& val) {
+	return val + num; //add normally
 }
+
+//subtraction operator where left operand is a long
+inline BigInt operator-(long num, BigInt const& val) {
+	BigInt* tempNum = new BigInt(num);
+
+	return *tempNum - val; //add normally
+}
+
+//multiplication operator where left operand is a long
+inline BigInt operator*(long num, BigInt const& val) {
+	return val * num; //multiply normally
+}
+
 // equality operator where left operand is a long
 inline bool operator==(long num, BigInt const& val) {
 
-	BigInt numBigInt = num;
-	
+	BigInt numBigInt = num; //make copy
+
 	return val.compare(numBigInt, val) == 0; //0 this == other || -1 this < other || 1 this > other
 }
 
 // < operator where left operand is a long
 inline bool operator<(long num, BigInt const& val) {
 
-	BigInt numBigInt = num;
+	BigInt numBigInt = num; //make copy
 
 	return val.compare(numBigInt, val) == -1; //0 this == other || -1 this < other || 1 this > other
 }
@@ -127,17 +148,17 @@ inline bool operator<(long num, BigInt const& val) {
 // <= operator where left operand is a long
 inline bool operator<=(long num, BigInt const& val) {
 
-	BigInt numBigInt = num;
+	BigInt numBigInt = num; //make copy
 
-	int compared = val.compare(numBigInt, val);
+	int compareBigInt = val.compare(numBigInt, val);
 
-	return compared == -1 || compared == 0; //0 this == other || -1 this < other || 1 this > other
+	return compareBigInt == -1 || compareBigInt == 0; //0 this == other || -1 this < other || 1 this > other
 }
 
 // > operator where left operand is a long
 inline bool operator>(long num, BigInt const& val) {
 
-	BigInt numBigInt = num;
+	BigInt numBigInt = num; //make copy
 
 	return val.compare(numBigInt, val) == 1; //0 this == other || -1 this < other || 1 this > other
 }
@@ -147,11 +168,10 @@ inline bool operator>=(long num, BigInt const& val) {
 
 	BigInt numBigInt = num;
 
-	int compared = val.compare(numBigInt, val);
+	int compareBigInt = val.compare(numBigInt, val);
 
-	return compared == 1 || compared == 0; //0 this == other || -1 this < other || 1 this > other
+	return compareBigInt == 1 || compareBigInt == 0; //0 this == other || -1 this < other || 1 this > other
 }
-
 
 
 #endif

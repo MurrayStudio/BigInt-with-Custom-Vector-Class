@@ -1,5 +1,10 @@
+//Author: Shamus Murray
+
+/****************************************************************
+* BigIntVector.cpp -- custom vector class for BigInt
+****************************************************************/
+
 #include <iostream>
-#include <stdlib.h> //for malloc()
 #include "BigIntVector.h"
 
 using namespace std;
@@ -8,117 +13,103 @@ using namespace std;
 BigIntVector::BigIntVector(BigIntVector const& orig)
 	: vectorSize(orig.vectorSize)
 {
-	vectorArray = new long[orig.vectorSize];
+	vectorArray = new int[orig.vectorSize];
 
-	//for loop
+	//copy orig array into copy array
 	for (int i = 0; i < vectorSize; i++) {
 		vectorArray[i] = orig.vectorArray[i];
 	}
-
-	//this->data = orig.data;
-
-	//orig = bigIntVector;
-
-	//*this = orig;
-	//cout << "vector copy called" << endl;
 }
 
 //destructor 
 BigIntVector::~BigIntVector() {
-	//delete[] vectorArray;
+	delete[] vectorArray;
 }
 
 //default constructor
 BigIntVector::BigIntVector()
 {
-	vectorSize = 1;
+	vectorSize = 1; //only have one slot available upon initilization
 
-	//vectorArray = (long *)malloc(10 * sizeof(long));
-	vectorArray = new long[vectorSize];
-	for (long i = 0; i < vectorSize; i++) {
-		vectorArray[i] = 0;
+	vectorArray = new int[vectorSize];
+	for (int i = 0; i < vectorSize; i++) {
+		vectorArray[i] = 0; //assign 0 to slot
 	}
 }
 
 //constructor that initializes a custom size for vector
-BigIntVector::BigIntVector(long initialSize)
+BigIntVector::BigIntVector(int initialSize)
 {
 	vectorSize = initialSize;
 
-	//vectorArray = (long *)malloc(initialSize*sizeof(long));
-	vectorArray = new long[vectorSize];
-	for (long i = 0; i < initialSize; i++) {
+	vectorArray = new int[vectorSize];
+	for (int i = 0; i < initialSize; i++) {
 		vectorArray[i] = 0;
 	}
 }
 
-long BigIntVector::getSize() const
+//get current size of vector
+int BigIntVector::getSize() const
 {
 	return vectorSize;
 }
 
+//increases vector capacity by 1
 void BigIntVector::resizePlusOne() {
 
-	long *oldArray = vectorArray;
+	int *oldArray = vectorArray;
 
-	vectorArray = new long[vectorSize + 1];
+	vectorArray = new int[vectorSize + 1];
 	//copy old array after new slot allocated in front
 	for (int k = 1; k < vectorSize + 1; k++) {
 		vectorArray[k] = oldArray[k - 1]; //k-1 because old array is behind one index
 	}
 
-	vectorArray[0] = 0; //init first spot to 0 instead of garbage
+	vectorArray[0] = 0; //init first spot to 0 instead of garbage memory
 
-	vectorSize = vectorSize + 1;
+	vectorSize = vectorSize + 1; //new size is + 1
 
-	delete[] oldArray;
+	delete[] oldArray; //delete old array
 }
 
+//decreases vector capacity by 1
 void BigIntVector::resizeMinusOne() {
 
-	long *oldArray = vectorArray;
+	int *oldArray = vectorArray;
 
-	vectorArray = new long[vectorSize - 1];
+	vectorArray = new int[vectorSize - 1];
 	//copy old array minus one at end
 	for (int k = 1; k < vectorSize; k++) {
-		vectorArray[k-1] = oldArray[k]; //end will be popped off
+		vectorArray[k - 1] = oldArray[k]; //end will be popped off
 	}
 
-	vectorSize = vectorSize - 1;
+	vectorSize = vectorSize - 1; //new size is - 1
 
-	delete[] oldArray;
+	delete[] oldArray; //delete old array
 }
 
-
-long BigIntVector::operator [](long i)
+//allows use of [] on vectors
+int BigIntVector::operator [](int index)
 {
-	return vectorArray[i];
+	return vectorArray[index];
 }
 
-long BigIntVector::getElementAt(long value) const
+//return element at index provided
+int BigIntVector::getElementAt(int index) const
 {
-	return vectorArray[value];
+	return vectorArray[index];
 }
 
-void BigIntVector::setElementAt(long index, long value)
+//set element value at index provided
+void BigIntVector::setElementAt(int index, int value)
 {
 	vectorArray[index] = value;
 }
 
-
-void BigIntVector::removeElementAt(long index)
-{
-	for (long i = index; i < vectorSize; i++)
-	{
-		vectorArray[i] = vectorArray[i + 1];
-	}
-
-	vectorArray[vectorSize - 1] = 0;
-}
-
+//print contents of vector
 ostream& operator<<(std::ostream& os, const BigIntVector& vct)
 {
-	for (long i = 0; i < vct.vectorSize; i++)
+	for (int i = 0; i < vct.vectorSize; i++)
 		os << vct.vectorArray[i];
 	return os;
 }

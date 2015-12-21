@@ -36,6 +36,16 @@ int main(void) {
 
 	cout << "numC (199998): " << numC << endl;
 
+	BigInt numD = 2;
+
+	numD *= num2;
+
+	cout << "numD (1740): " << numD << endl;
+
+	numD += num2;
+
+	cout << "numD (2610): " << numD << endl;
+
 
 	//****MULTIPLICATION****
 
@@ -70,18 +80,18 @@ int main(void) {
 
 	//****SUBTRACTION****
 
-	BigInt num9 = 199;
-	BigInt num10 = 100;
+	BigInt num9 = 100;
+	BigInt num10 = 10;
 
 	BigInt num11 = num9 - num10;
 
-	cout << "num11 (99): " << num11 << endl;
+	cout << "num11 (90): " << num11 << endl;
 
 	BigInt num12 = 2;
 	
-	num8 -= num12;
+	num8 = 1 + num8;
 
-	cout << "num8 (30! - 1): " << num8 << endl;
+	cout << "num8 (30! + 1): " << num8 << endl;
 
 	//****Boolean****
 
@@ -94,7 +104,7 @@ int main(void) {
 	// perform some equality tests where 1 = true and 0 = false
 	bool bool1 = boolNum == boolNum3; 
 
-	cout << "bool1 (0): " << bool1 << endl;
+	cout << "bool1 (1): " << bool1 << endl;
 
 	bool bool2 = boolNum < boolNum2; 
 
@@ -128,36 +138,111 @@ int main(void) {
 
 	cout << "bool9 (0): " << bool9 << endl;
 
-	//bool bool7 = 9 < boolNum; // BigInt == long
+	//****NEGATIVE COMPUTATIONS****
+	BigInt num20 = -10;
+	BigInt num21 = 20;
 
-	//cout << "bool7 (1): " << bool7 << endl;
+	num20 += num21;
 
+	cout << "num20 (10): " << num20 << endl;
+
+	BigInt num23 = -10;
+	BigInt num24 = -20;
+
+	num23 -= num24;
+
+	cout << "num23 (10): " << num23 << endl;
+
+	BigInt num26 = 10;
+	BigInt num27 = 20;
+
+	num26 *= num27;
+
+	cout << "num26 (200): " << num26 << endl;
+
+	//****PREFIX/POSTIFX****
+	BigInt num30 = -10;
+
+	BigInt num31 = ++num30;
+
+	cout << "num31 (-9): " << num31 << endl;
+
+
+	//****Commented Starter Code Tests****
+
+
+	//// object with explicit constructor from long
+	//BigInt num1(40);
+
+	//// object with implicit constructor from long
+	//BigInt num2 = 60;
+
+	//// binary addition BigInt+BigInt
+	//BigInt num3 = num1 + num2;
+
+	//// binary addition BigInt+long
+	//BigInt num4 = num3 + 2;
+
+	//// unary +
+	//BigInt num5 = +num2;
+
+	//// prefix increment
+	//BigInt num6 = ++num1;
+
+	//// postfix increment
+	//BigInt num7 = num3++;
+
+	//// direct initialization
+	//BigInt num8 = num3;
+
+	//// increment
+	//num3++;
+
+	//// print the values
+	//cout << num1 << " " << num2 << " " << num3 << " " <<
+	//	num4 << " " << num5 << " " << num6 << " " <<
+	//	num7 << " " << num8 << endl;
+
+	//// compound assignment addition with BigInt
+	//num4 += num5;
+
+	//// compund assignment addition with long
+	//num5 += 34;
+
+	//// assignment with long
+	//num8 = 23;
+
+	//// binary addition: long + BigInt
+	//num3 = 28 + num8;
+
+	//// perform some equality tests
+	//bool bool1 = num7 == num8; // BigInt == BigInt
 	//bool bool2 = num6 == num1; // BigInt == BigInt
 	//bool bool3 = num1 == 4; // BigInt == long
 	//bool bool4 = num2 == 60; // BigInt == long
 	//bool bool5 = 4 == num1; // long == BigInt
 	//bool bool6 = 60 == num2; // long == BigInt
 
-							 // print the values
-	//cout << "Bool Values: " << bool1 << " " << bool2 << " " << bool3 << " " <<
-	//	bool4 << " " << bool5 << " " << bool6 << " " << "\n" << endl;
-
-	//cout << "Num Values: " << num1 << " " << num2 << " " << num3 << " " <<
+	//						 // print the values
+	//cout << bool1 << " " << bool2 << " " << bool3 << " " <<
+	//	bool4 << " " << bool5 << " " << bool6 << " " << endl;
+	//cout << num1 << " " << num2 << " " << num3 << " " <<
 	//	num4 << " " << num5 << " " << num6 << " " <<
-	//	num7 << " " << num8 << "\n" << endl;
+	//	num7 << " " << num8 << endl;
 
-	// loop that computes a very large value
-	//
-	// with the dummied-up varsion, it overflows; in the completed
-	// implementation, it should actually compute the correct value
+	//// loop that computes a very large value
+	////
+	//// with the dummied-up varsion, it overflows; in the completed
+	//// implementation, it should actually compute the correct value
 	//BigInt bigVal = 1234;
-	//cout << "Big Val: " << bigVal << "\n" << endl;
-	//for (BigInt i = 0; !(i == 35); i++) {
+	//cout << bigVal << endl;
+	//for (BigInt i = 0; !(i == 30); i++) {
 	//	bigVal += bigVal;
 	//	bigVal += bigVal;
 	//	bigVal += 1;
-	//	cout << "New Big Val: " << bigVal << endl;
+	//	//cout << bigVal << endl;
 	//}
+	//cout << bigVal << endl;
 
 	return EXIT_SUCCESS;
 }
